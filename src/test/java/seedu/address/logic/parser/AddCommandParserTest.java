@@ -10,8 +10,6 @@ import static seedu.address.testutil.TypicalWorkouts.BOB_WORKOUT;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Workout;
-import seedu.address.model.workout.Workout;
 import seedu.address.model.workout.Workout;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.WorkoutBuilder;
