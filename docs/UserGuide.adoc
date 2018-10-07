@@ -56,6 +56,7 @@ Format: `add name/NAME [type/TYPE] [duration/DURATION] [difficulty/DIFFICULTY] [
 
 [TIP]
 A workout can have any number of tags (including 0)
+A system message will also be outputted to remind the user to include a state tag - future, current or completed.
 
 Examples:
 
