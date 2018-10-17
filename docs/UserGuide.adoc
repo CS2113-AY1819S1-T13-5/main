@@ -92,6 +92,34 @@ Edits the type and duration of the 1st workout to be `strength` and `20m` respec
 * `edit 2 name/Arnold's workout tag/` +
 Edits the name of the 2nd workout to be `Arnold's workout` and clears all existing tags.
 
+=== Changing a workout to be current : `current`
+
+Changes a workout to be a current workout in the workout book. +
+Format: `current INDEX`
+
+****
+* Changes a workout tag from future or completed to current at the specified `INDEX`. The index refers to the index number shown in the displayed workout list. The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `current 1` +
+Changes the `future` or `completed` tag in the 1st workout to be `current`.
+
+=== Changing a workout to be completed : `complete`
+
+Changes a workout to be a completed workout in the workout book. +
+Format: `current INDEX`
+
+****
+* Changes a workout tag from future or current to completed at the specified `INDEX`. The index refers to the index number shown in the displayed workout list. The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `complete 1` +
+Changes the `future` or `current` tag in the 1st workout to be `completed`.
+
 === Locating workouts by name: `filter`
 
 Filters workouts whose types, durations, equipments contain any of the given keywords. +
@@ -308,8 +336,12 @@ e.g. `add name/commando workout type/strength, cardio duration/20m difficulty/ad
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `dit INDEX [name/NAME] [type/TYPE] [duration/DURATION] [difficulty/DIFFICULTY] [equipment/EQUIPMENT] [muscle/MUSCLE] [calories/CALORIES] [instruction/INSTRUCTION] [tag/TAG]…​` +
+* *Edit* : `edit INDEX [name/NAME] [type/TYPE] [duration/DURATION] [difficulty/DIFFICULTY] [equipment/EQUIPMENT] [muscle/MUSCLE] [calories/CALORIES] [instruction/INSTRUCTION] [tag/TAG]…​` +
 e.g. `edit 1 type/light duration/25m`
+* *Current* : `current INDEX` +
+e.g.`current 1`
+* *Complete* : `complete INDEX` +
+e.g.`complete 1`
 * *Filter* : `filter [type/TYPE] [duration/DURATION] [equipment/EQUIPMENT]` +
 e.g. `filter type/strength duration/20m equipment/dumbbell`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
