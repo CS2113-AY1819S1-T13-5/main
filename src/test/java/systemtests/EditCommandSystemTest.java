@@ -92,8 +92,9 @@ public class EditCommandSystemTest extends WorkoutBookSystemTest {
         /* Case: edit a workout with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT
                 + DURATION_DESC_BOB_WORKOUT + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT
-                + MUSCLE_DESC_BOB_WORKOUT + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT + TAG_DESC_NIGHT;
-        assertCommandSuccess(command, index, BOB_WORKOUT);
+                + MUSCLE_DESC_BOB_WORKOUT + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT + TAG_DESC_FUTURE;
+        Workout temp = new WorkoutBuilder(BOB_WORKOUT).withTags(VALID_TAG_FUTURE).build();
+        assertCommandSuccess(command, index, temp);
 
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_WORKOUT;
@@ -134,7 +135,7 @@ public class EditCommandSystemTest extends WorkoutBookSystemTest {
         selectWorkout(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY_WORKOUT + TYPE_DESC_AMY_WORKOUT
                 + DURATION_DESC_AMY_WORKOUT + DIFFICULTY_DESC_AMY_WORKOUT + EQUIPMENT_DESC_AMY_WORKOUT
-                + MUSCLE_DESC_AMY_WORKOUT + CALORIES_DESC_AMY_WORKOUT + INSTRUCTION_DESC_AMY_WORKOUT + TAG_DESC_MORNING;
+                + MUSCLE_DESC_AMY_WORKOUT + CALORIES_DESC_AMY_WORKOUT + INSTRUCTION_DESC_AMY_WORKOUT;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new workout's name
         assertCommandSuccess(command, index, AMY_WORKOUT, index);
@@ -196,7 +197,7 @@ public class EditCommandSystemTest extends WorkoutBookSystemTest {
 
         /* Case: edit a workout with new values same as another workout's values -> rejected */
         executeCommand(WorkoutUtil.getAddCommand(BOB_WORKOUT));
-        assertTrue(getModel().getWorkoutBook().getWorkoutList().contains(BOB_WORKOUT));
+        assertTrue(getModel().getWorkoutBook().getWorkoutList().contains(temp));
         index = INDEX_FIRST_WORKOUT;
         assertFalse(getModel().getFilteredWorkoutList().get(index.getZeroBased()).equals(BOB_WORKOUT));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT

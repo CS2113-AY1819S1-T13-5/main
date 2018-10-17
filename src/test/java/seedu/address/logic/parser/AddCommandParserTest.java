@@ -64,78 +64,78 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Workout expectedWorkout = new WorkoutBuilder(BOB_WORKOUT).withTags(VALID_TAG_NIGHT).build();
+        Workout expectedWorkout = new WorkoutBuilder(BOB_WORKOUT).withTags(VALID_TAG_NIGHT, VALID_TAG_FUTURE).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT
                 + DURATION_DESC_BOB_WORKOUT + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT
                 + MUSCLE_DESC_BOB_WORKOUT + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT
-                + TAG_DESC_NIGHT, new AddCommand(expectedWorkout));
+                + TAG_DESC_NIGHT + TAG_DESC_FUTURE, new AddCommand(expectedWorkout));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY_WORKOUT + NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT
                 + DURATION_DESC_BOB_WORKOUT + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT
                 + MUSCLE_DESC_BOB_WORKOUT + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT
-                + TAG_DESC_NIGHT, new AddCommand(expectedWorkout));
+                + TAG_DESC_NIGHT + TAG_DESC_FUTURE, new AddCommand(expectedWorkout));
 
         // multiple types - last type accepted
         assertParseSuccess(parser, NAME_DESC_BOB_WORKOUT + TYPE_DESC_AMY_WORKOUT + TYPE_DESC_BOB_WORKOUT
                 + DURATION_DESC_BOB_WORKOUT + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT
                 + MUSCLE_DESC_BOB_WORKOUT + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT
-                + TAG_DESC_NIGHT, new AddCommand(expectedWorkout));
+                + TAG_DESC_NIGHT + TAG_DESC_FUTURE, new AddCommand(expectedWorkout));
 
         // multiple durations - last duration accepted
         assertParseSuccess(parser, NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT + DURATION_DESC_AMY_WORKOUT
                 + DURATION_DESC_BOB_WORKOUT + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT
                 + MUSCLE_DESC_BOB_WORKOUT + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT
-                + TAG_DESC_NIGHT, new AddCommand(expectedWorkout));
+                + TAG_DESC_NIGHT + TAG_DESC_FUTURE, new AddCommand(expectedWorkout));
 
         // multiple difficulties - last difficulty accepted
         assertParseSuccess(parser, NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT + DURATION_DESC_BOB_WORKOUT
                 + DIFFICULTY_DESC_AMY_WORKOUT + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT
                 + MUSCLE_DESC_BOB_WORKOUT + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT
-                + TAG_DESC_NIGHT, new AddCommand(expectedWorkout));
+                + TAG_DESC_NIGHT + TAG_DESC_FUTURE, new AddCommand(expectedWorkout));
 
         // multiple equipments - last equipment accepted
         assertParseSuccess(parser, NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT + DURATION_DESC_BOB_WORKOUT
                 + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_AMY_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT
                 + MUSCLE_DESC_BOB_WORKOUT + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT
-                + TAG_DESC_NIGHT, new AddCommand(expectedWorkout));
+                + TAG_DESC_NIGHT + TAG_DESC_FUTURE, new AddCommand(expectedWorkout));
 
         // multiple muscles - last muscle accepted
         assertParseSuccess(parser, NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT + DURATION_DESC_BOB_WORKOUT
                 + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT + MUSCLE_DESC_AMY_WORKOUT
                 + MUSCLE_DESC_BOB_WORKOUT + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT
-                + TAG_DESC_NIGHT, new AddCommand(expectedWorkout));
+                + TAG_DESC_NIGHT + TAG_DESC_FUTURE, new AddCommand(expectedWorkout));
 
         // multiple calories - last calories accepted
         assertParseSuccess(parser, NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT + DURATION_DESC_BOB_WORKOUT
                 + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT + MUSCLE_DESC_BOB_WORKOUT
                 + CALORIES_DESC_AMY_WORKOUT + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT
-                + TAG_DESC_NIGHT, new AddCommand(expectedWorkout));
+                + TAG_DESC_NIGHT + TAG_DESC_FUTURE, new AddCommand(expectedWorkout));
 
         // multiple instructions - last instruction accepted
         assertParseSuccess(parser, NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT + DURATION_DESC_BOB_WORKOUT
                 + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT + MUSCLE_DESC_BOB_WORKOUT
                 + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_AMY_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT
-                + TAG_DESC_NIGHT, new AddCommand(expectedWorkout));
+                + TAG_DESC_NIGHT + TAG_DESC_FUTURE, new AddCommand(expectedWorkout));
 
         // multiple tags - all accepted
         Workout expectedWorkoutMultipleTags = new WorkoutBuilder(BOB_WORKOUT)
-                .withTags(VALID_TAG_MORNING, VALID_TAG_NIGHT).build();
+                .withTags(VALID_TAG_MORNING, VALID_TAG_NIGHT, VALID_TAG_FUTURE).build();
         assertParseSuccess(parser, NAME_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT + DURATION_DESC_BOB_WORKOUT
                 + DIFFICULTY_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT + MUSCLE_DESC_BOB_WORKOUT
                 + CALORIES_DESC_BOB_WORKOUT + INSTRUCTION_DESC_BOB_WORKOUT + TAG_DESC_MORNING
-                + TAG_DESC_NIGHT, new AddCommand(expectedWorkoutMultipleTags));
+                + TAG_DESC_NIGHT + TAG_DESC_FUTURE, new AddCommand(expectedWorkoutMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Workout expectedWorkout = new WorkoutBuilder(AMY_WORKOUT).withTags().build();
+        // zero tags except future tag
+        Workout expectedWorkout = new WorkoutBuilder(AMY_WORKOUT).withTags(VALID_TAG_FUTURE).build();
         assertParseSuccess(parser, NAME_DESC_AMY_WORKOUT + TYPE_DESC_AMY_WORKOUT + DURATION_DESC_AMY_WORKOUT
                         + DIFFICULTY_DESC_AMY_WORKOUT + EQUIPMENT_DESC_AMY_WORKOUT + MUSCLE_DESC_AMY_WORKOUT
-                        + CALORIES_DESC_AMY_WORKOUT + INSTRUCTION_DESC_AMY_WORKOUT, new AddCommand(expectedWorkout));
+                        + CALORIES_DESC_AMY_WORKOUT + INSTRUCTION_DESC_AMY_WORKOUT + TAG_DESC_FUTURE, new AddCommand(expectedWorkout));
     }
 
     @Test

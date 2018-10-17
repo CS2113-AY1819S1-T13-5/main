@@ -30,13 +30,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MUSCLE_BOB_WORK
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB_WORKOUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB_WORKOUT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.TypicalWorkouts.ALICE_WORKOUT;
-import static seedu.address.testutil.TypicalWorkouts.AMY_WORKOUT;
-import static seedu.address.testutil.TypicalWorkouts.BOB_WORKOUT;
-import static seedu.address.testutil.TypicalWorkouts.CARL_WORKOUT;
-import static seedu.address.testutil.TypicalWorkouts.HOON_WORKOUT;
-import static seedu.address.testutil.TypicalWorkouts.IDA_WORKOUT;
-import static seedu.address.testutil.TypicalWorkouts.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalWorkouts.*;
 
 import org.junit.Test;
 
@@ -60,14 +54,15 @@ public class AddCommandSystemTest extends WorkoutBookSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a workout without tags to a non-empty workout book, command with leading spaces and trailing spaces
+        /* Case: add a workout without tags except automatically added default future tag to a non-empty workout book,
+        command with leading spaces and trailing spaces
          * -> added
          */
-        Workout toAdd = AMY_WORKOUT;
-        String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY_WORKOUT + "  " + TYPE_DESC_AMY_WORKOUT
+        Workout toAdd = new WorkoutBuilder(AMY_WORKOUT).withTags(VALID_TAG_FUTURE).build();
+        String command = "   " + AddCommand.COMMAND_WORD + "   " + NAME_DESC_AMY_WORKOUT + "   " + TYPE_DESC_AMY_WORKOUT
                 + "   " + DURATION_DESC_AMY_WORKOUT + "   " + DIFFICULTY_DESC_AMY_WORKOUT + "   "
                 + EQUIPMENT_DESC_AMY_WORKOUT + "   " + MUSCLE_DESC_AMY_WORKOUT + "   " + CALORIES_DESC_AMY_WORKOUT
-                + "   " + INSTRUCTION_DESC_AMY_WORKOUT + "   " + TAG_DESC_MORNING + " ";
+                + "   " + INSTRUCTION_DESC_AMY_WORKOUT + "   " + TAG_DESC_FUTURE + "   ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -83,13 +78,14 @@ public class AddCommandSystemTest extends WorkoutBookSystemTest {
 
         /* Case: add to empty workout book -> added */
         deleteAllWorkouts();
-        assertCommandSuccess(ALICE_WORKOUT);
+        assertCommandSuccess(toAdd);
 
         /* Case: add a workout with tags, command with parameters in random order -> added */
-        toAdd = BOB_WORKOUT;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_NIGHT + INSTRUCTION_DESC_BOB_WORKOUT + CALORIES_DESC_BOB_WORKOUT
-                + MUSCLE_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT + DIFFICULTY_DESC_BOB_WORKOUT
-                + DURATION_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT + NAME_DESC_BOB_WORKOUT;
+        toAdd = new WorkoutBuilder(BOB_WORKOUT).withTags(VALID_TAG_NIGHT, VALID_TAG_FUTURE).build();
+        command = AddCommand.COMMAND_WORD + TAG_DESC_NIGHT + TAG_DESC_FUTURE + INSTRUCTION_DESC_BOB_WORKOUT
+                + CALORIES_DESC_BOB_WORKOUT + MUSCLE_DESC_BOB_WORKOUT + EQUIPMENT_DESC_BOB_WORKOUT
+                + DIFFICULTY_DESC_BOB_WORKOUT + DURATION_DESC_BOB_WORKOUT + TYPE_DESC_BOB_WORKOUT
+                + NAME_DESC_BOB_WORKOUT;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a workout, missing tags -> added */
@@ -105,7 +101,7 @@ public class AddCommandSystemTest extends WorkoutBookSystemTest {
 
         /* Case: selects first card in the workout list, add a workout -> added, card selection remains unchanged */
         selectWorkout(Index.fromOneBased(1));
-        assertCommandSuccess(CARL_WORKOUT);
+        assertCommandSuccess(JOHN_WORKOUT);
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
