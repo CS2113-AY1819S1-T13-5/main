@@ -62,16 +62,16 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="ulist">
 <ul>
 <li>
-<p><strong><code>list</code></strong> : lists all workouts</p>
+<p><strong><code>list</code></strong> : Lists all workouts in the WorkoutBook.</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>add name/commando workout type/strength duration/20m difficulty/advanced equipment/dumbbell, bench muscle/bicep, tricep calories/150 instruction/set 1: bicep curl reps: 4-6 set 2: tricep extension reps: 4-6 tag/heavy</code> : adds a Workout named <code>commando</code> to the WorkoutBook.</p>
+<p><strong><code>add</code></strong><code>name/commando workout type/strength duration/20m difficulty/advanced equipment/dumbbell, bench muscle/bicep, tricep calories/150 instruction/set 1: bicep curl reps: 4-6 set 2: tricep extension reps: 4-6 tag/heavy</code> : adds a Workout named <code>commando workout</code> to the WorkoutBook.</p>
 </li>
 <li>
-<p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd workout shown in the current list</p>
+<p><strong><code>delete</code></strong><code>3</code> : Deletes the 3rd workout shown in the current list of workouts.</p>
 </li>
 <li>
-<p><strong><code>exit</code></strong> : exits the app</p>
+<p><strong><code>exit</code></strong> : Exits the application.</p>
 </li>
 </ul>
 </div>
@@ -97,6 +97,34 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add name/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add name/commando workout</code>.</p>
 </li>
 <li>
+<p>Below is a list of the remaining parameters with examples of their acceptable formats:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>CALORIES</em></strong> are positive integers from 1 to 1000. E.g. <code>120</code>, <code>500</code>, etc.</p>
+</li>
+<li>
+<p><strong><em>DIFFICULTY</em></strong> should only be either beginner, intermediate or advanced.</p>
+</li>
+<li>
+<p><strong><em>DURATION</em></strong> should only be in this format: E.g. <code>20m</code>, <code>500m</code>, etc from 1m to 1000m.</p>
+</li>
+<li>
+<p><strong><em>EQUIPMENT</em></strong> is a list of equipment separated by commas, and it should not be blank. E.g. <code>dumbbell,bench,mat</code> and <code>dumbbell, bench, mat</code> are valid.</p>
+</li>
+<li>
+<p><strong><em>MUSCLE</em></strong> is a list of muscle groups separated by commas, and it should not be blank. E.g. <code>triceps,biceps,back</code> and <code>triceps, biceps, back</code> are valid.</p>
+</li>
+<li>
+<p><strong><em>TYPE</em></strong> is a list of workout types separated by commas, and it should not be blank. E.g. <code>cardio,strength,balance</code> and <code>cardio, strength, balance</code> are valid.</p>
+</li>
+<li>
+<p><strong><em>INSTRUCTION</em></strong> should only contain alphanumeric characters, punctuation, spaces, and it should not be blank. E.g. <code>set1: dumbbell curls reps: 4-6</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
 <p>Items in square brackets are optional e.g <code>name/NAME [tag/TAG]</code> can be used as <code>name/commando workout tag/strength</code> or as <code>name/commando workout</code>.</p>
 </li>
 <li>
@@ -104,6 +132,12 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 <li>
 <p>Parameters can be in any order e.g. if the command specifies <code>name/NAME type/TYPE</code>, <code>type/TYPE name/NAME</code> is also acceptable.</p>
+</li>
+<li>
+<p>White spaces after a slash are automatically trimmed. For example, <code>add name/ commando workout</code> and <code>add name/commando workout</code> are the same. However, the latter is more visually pleasing.</p>
+</li>
+<li>
+<p>Duplicate parameters after one another will only take the last parameter input. For example, <code>add name/commando workout name/arnold workout</code> will only add the workout as arnold workout.</p>
 </li>
 </ul>
 </div>
@@ -119,7 +153,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <h3 id="adding-a-workout-code-add-code"><a class="link" href="#adding-a-workout-code-add-code">3.2. Adding a workout: <code>add</code></a></h3>
 <div class="paragraph">
 <p>Adds a workout to the workout book<br>
-Format: <code>add name/NAME [type/TYPE] [duration/DURATION] [difficulty/DIFFICULTY] [equipment/EQUIPMENT] [muscle/MUSCLE] [calories/CALORIES] [instruction/INSTRUCTION] [tag/TAG]…​</code></p>
+Format: <code>add name/NAME type/TYPE duration/DURATION difficulty/DIFFICULTY equipment/EQUIPMENT muscle/MUSCLE calories/CALORIES instruction/INSTRUCTION [tag/TAG]…​</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -278,7 +312,7 @@ Changes the state tag of the 1st workout to be <code>completed</code>.</p>
 <h3 id="locating-workouts-by-name-code-filter-code"><a class="link" href="#locating-workouts-by-name-code-filter-code">3.7. Locating workouts by name: <code>filter</code></a></h3>
 <div class="paragraph">
 <p>Filters workouts whose types, durations, equipments contain any of the given keywords.<br>
-Format: <code>filter [type/TYPE] [duratiorn/DURATION] [equipment/EQUIPMENT]</code></p>
+Format: <code>filter type/TYPE duration/DURATION equipment/EQUIPMENT</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -304,7 +338,7 @@ Format: <code>filter [type/TYPE] [duratiorn/DURATION] [equipment/EQUIPMENT]</cod
 <ul>
 <li>
 <p><code>filter duration/20m equipment/dumbbell type/strength</code><br>
-Returns any workout having duration of <code>20m</code>, equipment of <code>dumbbell</code>, type of <code>strength</code></p>
+Returns any workout having duration of <code>20m</code>, with equipment of <code>dumbbell</code> and of type <code>strength</code>.</p>
 </li>
 </ul>
 </div>
@@ -345,11 +379,11 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <ul>
 <li>
 <p><code>find commando</code><br>
-Returns <code>command workout</code></p>
+Returns <code>command workout</code>.</p>
 </li>
 <li>
 <p><code>find commando arnold&#8217;s</code><br>
-Returns any workout having names <code>commando</code> or <code>arnold&#8217;s</code></p>
+Returns any workout having names <code>commando</code> or <code>arnold&#8217;s</code>.</p>
 </li>
 </ul>
 </div>
@@ -676,7 +710,7 @@ There is no need to save manually.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add name/NAME [type/TYPE] [duration/DURATION] [difficulty/DIFFICULTY] [equipment/EQUIPMENT] [muscle/MUSCLE] [calories/CALORIES] [instruction/INSTRUCTION] [tag/TAG]&#8230;&#8203;</code><br>
+<p><strong>Add</strong> : <code>add name/NAME type/TYPE duration/DURATION difficulty/DIFFICULTY equipment/EQUIPMENT muscle/MUSCLE calories/CALORIES instruction/INSTRUCTION [tag/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add name/commando workout type/strength, cardio duration/20m difficulty/advanced equipment/dumbbell, bench muscle/bicep, tricep calories/150 instruction/set 1: bicep curl reps: 4-6 set 2: tricep extension reps: 4-6 tag/heavy</code></p>
 </li>
 <li>
@@ -687,11 +721,11 @@ e.g. <code>add name/commando workout type/strength, cardio duration/20m difficul
 e.g. <code>delete 3</code></p>
 </li>
 <li>
-<p><strong>Edit</strong> : <code>dit INDEX [name/NAME] [type/TYPE] [duration/DURATION] [difficulty/DIFFICULTY] [equipment/EQUIPMENT] [muscle/MUSCLE] [calories/CALORIES] [instruction/INSTRUCTION] [tag/TAG]…​</code><br>
+<p><strong>Edit</strong> : <code>edit INDEX [name/NAME] [type/TYPE] [duration/DURATION] [difficulty/DIFFICULTY] [equipment/EQUIPMENT] [muscle/MUSCLE] [calories/CALORIES] [instruction/INSTRUCTION] [tag/TAG]…​</code><br>
 e.g. <code>edit 1 type/light duration/25m</code></p>
 </li>
 <li>
-<p><strong>Filter</strong> : <code>filter [type/TYPE] [duration/DURATION] [equipment/EQUIPMENT]</code><br>
+<p><strong>Filter</strong> : <code>filter type/TYPE duration/DURATION equipment/EQUIPMENT</code><br>
 e.g. <code>filter type/strength duration/20m equipment/dumbbell</code></p>
 </li>
 <li>
@@ -721,14 +755,14 @@ e.g.<code>select 2</code></p>
 <p><strong>Redo</strong> : <code>redo</code></p>
 </li>
 <li>
-<p><strong>Recommend</strong> : <code>recommend r/[PARAMETER]</code><br>
-e.g. <code>recommend r/intermediate</code></p>
+<p><strong>Recommend</strong> : <code>recommend [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]</code><br>
+e.g. <code>recommend calories/150</code></p>
 </li>
 <li>
-<p><strong>Modify</strong> : <code>modify</code>
+<p><strong>Modify</strong> : <code>modify</code><br>
 e.g. <code>modify username/John Doe</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-26 12:51:09 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-27 17:43:36 UTC</div></div></div></body></html>
