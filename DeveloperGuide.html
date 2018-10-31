@@ -32,7 +32,7 @@
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#recommending-a-workout">3.2. Recommending a workout</a></li>
 <li><a href="#user-profile">3.3. User Profile</a></li>
-<li><a href="#traversing-feature">3.4. [Traversing feature]</a></li>
+<li><a href="#traversing-and-remark-feature">3.4. Traversing and remark feature</a></li>
 <li><a href="#memory-feature">3.5. Memory feature</a></li>
 <li><a href="#tracking-feature">3.6. Tracking Feature</a></li>
 <li><a href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></li>
@@ -909,7 +909,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="traversing-feature"><a class="link" href="#traversing-feature">3.4. [Traversing feature]</a></h3>
+<h3 id="traversing-and-remark-feature"><a class="link" href="#traversing-and-remark-feature">3.4. Traversing and remark feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
@@ -925,10 +925,10 @@ It implements following commands:<br></p>
 <p><code>FilterCommand()</code> -Filters the workout book</p>
 </li>
 <li>
-<p><code>SearchCommand()</code> - Search the workout by partial keywords</p>
+<p><code>SelectCommand()</code> -Select the workout by index number</p>
 </li>
 <li>
-<p><code>SelectCommand()</code> - Select the workout by index number</p>
+<p><code>RemarkCommand()</code> -Remark the workout by index number</p>
 </li>
 </ul>
 </div>
@@ -942,9 +942,17 @@ The sort command calls the <code>sortFilteredWorkoutList()</code> of <code>Model
 <div class="paragraph">
 <p>Step 2. The user executes <code>filter</code> to find the workouts that contain <code>duration</code>, <code>equipment</code> and <code>type</code>.</p>
 </div>
+<div class="paragraph">
+<p>Step 3. The user executes <code>remark</code> to remark a workout</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/traversingSequenceDiagram.png" alt="traversingSequenceDiagram" width="650">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/HighLevelRemarkSequenceDiagrams.png" alt="HighLevelRemarkSequenceDiagrams" width="650">
 </div>
 </div>
 </div>
@@ -2673,4 +2681,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 17:00:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 12:56:27 UTC</div></div></div></body></html>
