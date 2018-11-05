@@ -112,6 +112,6 @@ public class TypicalWorkouts {
 
     public static List<Workout> getTypicalWorkouts() {
         return new ArrayList<>(Arrays.asList(ALICE_WORKOUT, BENSON_WORKOUT, CARL_WORKOUT, DANIEL_WORKOUT, ELLE_WORKOUT,
-                FIONA_WORKOUT, GEORGE_WORKOUT));
+                FIONA_WORKOUT, GEORGE_WORKOUT, HOON_WORKOUT, IDA_WORKOUT, JOHN_WORKOUT));
     }
 }

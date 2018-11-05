@@ -187,4 +187,13 @@ public class CommandTestUtil {
         model.commitModel();
     }
 
+    /**
+     * Deletes the tenth workout in {@code model}'s filtered list from {@code model}'s workout book.
+     */
+    public static void deleteTenthWorkout(Model model) {
+        Workout tenthWorkout = model.getFilteredWorkoutList().get(9);
+        model.deleteWorkout(tenthWorkout);
+        model.commitModel();
+    }
+
 }

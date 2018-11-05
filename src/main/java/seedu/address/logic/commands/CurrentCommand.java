@@ -94,7 +94,7 @@ public class CurrentCommand extends Command {
      * Creates and returns a {@code Workout} with the details of {@code workoutToEdit}
      * edited with {@code editWorkoutDescriptor}.
      */
-    public Workout createEditedWorkout(Workout workoutToEdit) throws CommandException {
+    public static Workout createEditedWorkout(Workout workoutToEdit) throws CommandException {
         assert workoutToEdit != null;
         Name updatedName = workoutToEdit.getName();
         Type updatedType = workoutToEdit.getType();
@@ -183,7 +183,7 @@ public class CurrentCommand extends Command {
      * @param duration boolean to check if the user's indicated duration is higher than the workout's duration
      * @return the appropriate pop up message
      */
-    private String popUpMessage(boolean difficulty, boolean calories, boolean duration) {
+    private static String popUpMessage(boolean difficulty, boolean calories, boolean duration) {
         if (((difficulty || calories) == false) && duration) {
             return MESSAGE_HIGHER_DURATION + MESSAGE_CONTINUE;
         } else if (((difficulty || duration) == false) && calories) {
