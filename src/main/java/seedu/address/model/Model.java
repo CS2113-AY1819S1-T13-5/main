@@ -212,5 +212,5 @@ public interface Model {
     /**
      * Returns the filtered internal list.
      */
-    List<Workout> getFilteredInternalList(RecommendArguments recommendArguments);
+    List<Workout> getFinalFilteredInternalList(RecommendArguments recommendArguments);
 }

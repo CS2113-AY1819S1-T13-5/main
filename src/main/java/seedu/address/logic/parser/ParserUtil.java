@@ -17,6 +17,7 @@ import seedu.address.model.workout.Difficulty;
 import seedu.address.model.workout.Duration;
 import seedu.address.model.workout.Equipment;
 import seedu.address.model.workout.Instruction;
+import seedu.address.model.workout.Mode;
 import seedu.address.model.workout.Muscle;
 import seedu.address.model.workout.Name;
 import seedu.address.model.workout.Remark;
@@ -145,6 +146,21 @@ public class ParserUtil {
             throw new ParseException(Calories.MESSAGE_CALORIES_CONSTRAINTS);
         }
         return new Calories(trimmedCalories);
+    }
+
+    /**
+     * Parses a {@code String mode} into a {@code mode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code mode} is invalid.
+     */
+    public static Mode parseMode(String mode) throws ParseException {
+        requireNonNull(mode);
+        String trimmedMode = mode.trim();
+        if (!Mode.isValidMode(trimmedMode)) {
+            throw new ParseException(Mode.MESSAGE_MODE_CONSTRAINTS);
+        }
+        return new Mode(trimmedMode);
     }
 
     /**

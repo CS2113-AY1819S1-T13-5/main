@@ -3,6 +3,7 @@ package seedu.address.model.workout;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
@@ -29,16 +30,75 @@ public class UniqueWorkoutList implements Iterable<Workout> {
 
     private final ObservableList<Workout> internalList = FXCollections.observableArrayList();
 
-    public List<Workout> getFilteredInternalList (RecommendArguments recommendArguments) {
-        return internalList.stream()
-                .filter(!recommendArguments.isCaloriesNull() ? w -> w.getCalories().toString()
-                        .equals(recommendArguments.getCalories().toString()) : w -> w != null)
-                .filter(!recommendArguments.isDifficultyNull() ? w -> w.getDifficulty().toString()
-                        .equals(recommendArguments.getDifficulty().toString()) : w -> w != null)
-                .filter(!recommendArguments.isDurationNull() ? w -> w.getDuration().toString()
+    public List<Workout> getFinalFilteredInternalList (RecommendArguments recommendArguments) {
+
+        if (recommendArguments.isDurationNull() || recommendArguments.isDifficultyNull()
+                || recommendArguments.isCaloriesNull()) {
+            return getFilteredInternalList(recommendArguments,
+                    new ArrayList<>(List.of(true, true, true)));
+        }
+
+        List<Workout> finalFilteredInternalList;
+        ArrayList<Boolean> optionalsList = recommendArguments.getOptionalsList();
+
+        int totalOptionals = 0;
+        for (int i = 0; i < optionalsList.size(); i++) {
+            if (optionalsList.get(i)) {
+                totalOptionals++;
+            }
+        }
+
+        finalFilteredInternalList = getFilteredInternalList(recommendArguments,
+                new ArrayList<>(List.of(true, true, true)));
+
+        // 3 Choose 2 (3 Optionals)
+        if (finalFilteredInternalList.isEmpty() && totalOptionals == 3) {
+            for (int i = 0; i < optionalsList.size(); i++) {
+                ArrayList<Boolean> conditionsList = new ArrayList<>(List.of(!optionalsList.get(0),
+                        !optionalsList.get(1), !optionalsList.get(2)));
+                conditionsList.set(i, true);
+                for (int j = i + 1; j < optionalsList.size(); j++) {
+                    conditionsList.set(j, true);
+                    finalFilteredInternalList.addAll(getFilteredInternalList(recommendArguments, conditionsList));
+                }
+            }
+        }
+
+        // 3 Choose 1 (2 Optionals, 3 Optionals)
+        if (finalFilteredInternalList.isEmpty() && totalOptionals >= 2) {
+            for (int i = 0; i < optionalsList.size(); i++) {
+                ArrayList<Boolean> conditionsList = new ArrayList<>(List.of(!optionalsList.get(0),
+                        !optionalsList.get(1), !optionalsList.get(2)));
+                if (optionalsList.get(i)) {
+                    conditionsList.set(i, true);
+                    finalFilteredInternalList.addAll(getFilteredInternalList(recommendArguments, conditionsList));
+                }
+            }
+        }
+
+        // 3 Choose 0 (1 Optionals, 2 Optionals, 3 Optionals)
+        if (finalFilteredInternalList.isEmpty() && totalOptionals >= 1) {
+            finalFilteredInternalList.addAll(getFilteredInternalList(recommendArguments,
+                    new ArrayList<>(List.of(!optionalsList.get(0), !optionalsList.get(1), !optionalsList.get(2)))));
+        }
+
+        return finalFilteredInternalList;
+    }
+
+    private List<Workout> getFilteredInternalList(RecommendArguments recommendArguments,
+                                                  ArrayList<Boolean> conditionsList) {
+        List<Workout> filteredInternalList = internalList.stream()
+                .filter((!recommendArguments.isCaloriesNull() && conditionsList.get(0)) ? w -> w.getCalories()
+                        .toString().equals(recommendArguments.getCalories().toString()) : w -> w != null)
+                .filter((!recommendArguments.isDifficultyNull() && conditionsList.get(1)) ? w -> w.getDifficulty()
+                        .toString().equals(recommendArguments.getDifficulty().toString()) : w -> w != null)
+                .filter((!recommendArguments.isDurationNull() && conditionsList.get(2))
+                        ? w -> w.getDuration().toString()
                         .equals(recommendArguments.getDuration().toString()) : w -> w != null)
                 .collect(Collectors.toList());
+        return filteredInternalList;
     }
+
 
     /**
      * Returns true if the list contains an equivalent workout as the given argument.

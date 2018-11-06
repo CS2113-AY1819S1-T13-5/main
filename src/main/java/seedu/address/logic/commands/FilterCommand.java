@@ -20,9 +20,9 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter all workouts based on keywords "
             + "Parameters: "
-            + "[" + PREFIX_TYPE + "TYPE] "
-            + "[" + PREFIX_DURATION + "DURATION] "
-            + "[" + PREFIX_EQUIPMENT + "EQUIPMENT] \n"
+            + PREFIX_TYPE + "TYPE "
+            + PREFIX_DURATION + "DURATION "
+            + PREFIX_EQUIPMENT + "EQUIPMENT\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_EQUIPMENT + "dumbbell "
             + PREFIX_TYPE + "strength "
@@ -62,8 +62,4 @@ public class FilterCommand extends Command {
                 && durationPredicate.equals(((FilterCommand) other).durationPredicate)); // state check
     }
 
-
-
-
 }
-

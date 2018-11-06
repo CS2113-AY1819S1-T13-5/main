@@ -47,8 +47,8 @@ public class WorkoutBook implements ReadOnlyWorkoutBook {
         this.workouts.setWorkouts(workouts);
     }
 
-    public List<Workout> getFilteredInternalList (RecommendArguments recommendArguments) {
-        return workouts.getFilteredInternalList(recommendArguments);
+    public List<Workout> getFinalFilteredInternalList (RecommendArguments recommendArguments) {
+        return workouts.getFinalFilteredInternalList(recommendArguments);
     }
 
     /**

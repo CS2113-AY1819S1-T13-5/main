@@ -2,12 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -26,6 +28,7 @@ import seedu.address.model.RecommendArguments;
 import seedu.address.model.workout.Calories;
 import seedu.address.model.workout.Difficulty;
 import seedu.address.model.workout.Duration;
+import seedu.address.model.workout.Mode;
 import seedu.address.model.workout.Parameter;
 import seedu.address.model.workout.Workout;
 import seedu.address.testutil.WorkoutBuilder;
@@ -55,25 +58,31 @@ public class RecommendCommandTest {
 
     @Test
     public void execute_acceptedByModel_recommendSuccessful() throws Exception {
-        // Valid Calories
-        Optional<Calories> calories = Optional.of(new Calories("150"));
-        RecommendArguments recommendArguments = new RecommendArguments.Builder().withCalories(calories).build();
+        // Valid Single Recommend Calories
+        Optional<Calories> calories = Optional.of(new Calories("1"));
+        Optional<Mode> mode = Optional.of(new Mode("single"));
+        RecommendArguments recommendArguments = new RecommendArguments.Builder().withCalories(calories,
+                Optional.of(false)).withMode(mode).build();
         CommandResult commandResult = new RecommendCommand(recommendArguments).execute(modelStub, commandHistory);
 
         assertEquals(RecommendCommand.MESSAGE_SUCCESS, commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
 
-        // Valid Difficulty
-        Optional<Difficulty> difficulty = Optional.of(new Difficulty("advanced"));
-        recommendArguments = new RecommendArguments.Builder().withDifficulty(difficulty).build();
+        // Valid Recommend Multiple Calories
+        calories = Optional.of(new Calories("500"));
+        mode = Optional.of(new Mode("multiple 1"));
+        recommendArguments = new RecommendArguments.Builder().withCalories(calories,
+                Optional.of(false)).withMode(mode).build();
         commandResult = new RecommendCommand(recommendArguments).execute(modelStub, commandHistory);
 
         assertEquals(RecommendCommand.MESSAGE_SUCCESS, commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
 
-        // Valid Duration
-        Optional<Duration> duration = Optional.of(new Duration("20m"));
-        recommendArguments = new RecommendArguments.Builder().withDuration(duration).build();
+        // Valid Recommend All Calories
+        calories = Optional.of(new Calories("1000"));
+        mode = Optional.of(new Mode("all"));
+        recommendArguments = new RecommendArguments.Builder().withCalories(calories,
+                Optional.of(false)).withMode(mode).build();
         commandResult = new RecommendCommand(recommendArguments).execute(modelStub, commandHistory);
 
         assertEquals(RecommendCommand.MESSAGE_SUCCESS, commandResult.feedbackToUser);
@@ -81,39 +90,67 @@ public class RecommendCommandTest {
     }
 
     @Test
-    public void execute_workoutNotFoundCalories_throwsCommandException() throws Exception {
-        // Valid Calories
+    public void execute_workoutNotFound_throwsCommandException() throws Exception {
+        // Valid Single Recommend Difficulty
+        Optional<Difficulty> difficulty = Optional.of(new Difficulty("beginner"));
+        Optional<Mode> mode = Optional.of(new Mode("single"));
+        RecommendArguments recommendArguments = new RecommendArguments.Builder().withDifficulty(difficulty,
+                Optional.of(false)).withMode(mode).build();
+        RecommendCommand recommendCommand = new RecommendCommand(recommendArguments);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(recommendCommand.MESSAGE_NO_SUCH_WORKOUT);
+        recommendCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_invalidSize_throwsCommandException() throws Exception {
+        // Valid Recommend Multiple Calories
+        Optional<Calories> calories = Optional.of(new Calories("250"));
+        Optional<Mode> mode = Optional.of(new Mode("multiple 2"));
+        RecommendArguments recommendArguments = new RecommendArguments.Builder().withCalories(calories,
+                Optional.of(false)).withMode(mode).build();
+        RecommendCommand recommendCommand = new RecommendCommand(recommendArguments);
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(String.format(recommendCommand.MESSAGE_INVALID_WORKOUTS_RECOMMENDED_SIZE, "1"));
+        recommendCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void equals() {
+        // Valid Single Recommend Duration
+        Optional<Duration> duration = Optional.of(new Duration("1m"));
+        Optional<Mode> mode = Optional.of(new Mode("single"));
+        RecommendArguments recommendArgumentsDuration = new RecommendArguments.Builder().withDuration(duration,
+                Optional.of(false)).withMode(mode).build();
+
+        // Valid Single Recommend Optional Calories, Difficulty and Duration
         Optional<Calories> calories = Optional.of(new Calories("1000"));
-        RecommendArguments recommendArguments = new RecommendArguments.Builder().withCalories(calories).build();
-        RecommendCommand recommendCommand = new RecommendCommand(recommendArguments);
-
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(recommendCommand.MESSAGE_NO_SUCH_WORKOUT);
-        recommendCommand.execute(modelStub, commandHistory);
-    }
-
-    @Test
-    public void execute_workoutNotFoundDifficulty_throwsCommandException() throws Exception {
-        // Valid Difficulty
         Optional<Difficulty> difficulty = Optional.of(new Difficulty("intermediate"));
-        RecommendArguments recommendArguments = new RecommendArguments.Builder().withDifficulty(difficulty).build();
-        RecommendCommand recommendCommand = new RecommendCommand(recommendArguments);
+        duration = Optional.of(new Duration("1000m"));
+        mode = Optional.of(new Mode("single"));
+        RecommendArguments recommendArgumentsCalories = new RecommendArguments.Builder().withCalories(calories,
+                Optional.of(true)).withDifficulty(difficulty, Optional.of(true)).withDuration(duration,
+                Optional.of(true)).withMode(mode).build();
+        RecommendCommand recommendCommandArgumentsDuration = new RecommendCommand(recommendArgumentsDuration);
+        RecommendCommand recommendCommandArgumentsCalories = new RecommendCommand(recommendArgumentsCalories);
 
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(recommendCommand.MESSAGE_NO_SUCH_WORKOUT);
-        recommendCommand.execute(modelStub, commandHistory);
-    }
+        // Same object -> returns true
+        assertTrue(recommendCommandArgumentsDuration.equals(recommendCommandArgumentsDuration));
 
-    @Test
-    public void execute_workoutNotFoundDuration_throwsCommandException() throws Exception {
-        // Valid Duration
-        Optional<Duration> duration = Optional.of(new Duration("1000m"));
-        RecommendArguments recommendArguments = new RecommendArguments.Builder().withDuration(duration).build();
-        RecommendCommand recommendCommand = new RecommendCommand(recommendArguments);
+        // Same values -> return true
+        RecommendCommand recommendArgumentsDurationCopy = new RecommendCommand(recommendArgumentsDuration);
+        assertTrue(recommendCommandArgumentsDuration.equals(recommendArgumentsDurationCopy));
 
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(recommendCommand.MESSAGE_NO_SUCH_WORKOUT);
-        recommendCommand.execute(modelStub, commandHistory);
+        // Different types -> return false
+        assertFalse(recommendCommandArgumentsDuration.equals(1));
+
+        // Null -> returns false
+        assertFalse(recommendCommandArgumentsDuration.equals(null));
+
+        // Different recommendArguments -> returns false
+        assertFalse(recommendCommandArgumentsDuration.equals(recommendCommandArgumentsCalories));
     }
 
     /**
@@ -169,20 +206,16 @@ public class RecommendCommandTest {
         }
 
         @Override
-        public List<Workout> getFilteredInternalList(RecommendArguments recommendArguments) {
-            return workoutsAdded.stream()
-                    .filter(!recommendArguments.isCaloriesNull() ? w -> w.getCalories().fullCalories
-                            .equals(recommendArguments.getCalories().toString()) : w -> w != null)
-                    .filter(!recommendArguments.isDifficultyNull() ? w -> w.getDifficulty().fullDifficulty
-                            .equals(recommendArguments.getDifficulty().toString()) : w -> w != null)
-                    .filter(!recommendArguments.isDurationNull() ? w -> w.getDuration().fullDuration
-                            .equals(recommendArguments.getDuration().toString()) : w -> w != null)
-                    .collect(Collectors.toList());
+        public List<Workout> getFinalFilteredInternalList(RecommendArguments recommendArguments) {
+            if (!recommendArguments.isCaloriesNull()) {
+                return getFilteredWorkoutList();
+            } else {
+                return Collections.emptyList();
+            }
         }
 
         @Override
         public void updateFilteredWorkoutList(Predicate<Workout> predicate) {
-            throw new AssertionError("This method should not be called.");
         }
 
         @Override

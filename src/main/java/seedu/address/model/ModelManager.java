@@ -55,6 +55,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Parameter> filteredParameters;
     private final FilteredList<Workout> filteredTrackedData;
 
+    private List<Workout> finalFilteredInternalList;
+
     /**
      * Initializes a ModelManager with the given workoutBook and userPrefs.
      */
@@ -223,8 +225,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public List<Workout> getFilteredInternalList(RecommendArguments recommendArguments) {
-        return versionedWorkoutBook.getFilteredInternalList(recommendArguments);
+    public List<Workout> getFinalFilteredInternalList(RecommendArguments recommendArguments) {
+        return versionedWorkoutBook.getFinalFilteredInternalList(recommendArguments);
     }
 
     @Override

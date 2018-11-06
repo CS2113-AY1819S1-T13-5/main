@@ -139,7 +139,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<Workout> getFilteredInternalList(RecommendArguments recommendArguments) {
+        public List<Workout> getFinalFilteredInternalList(RecommendArguments recommendArguments) {
             throw new AssertionError("This method should not be called.");
         }
 
