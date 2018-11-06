@@ -109,7 +109,7 @@ public class ModifyCommandParser implements Parser<ModifyCommand> {
                 if (!profileWindowManager.isValidDifficulty(difficulty)) {
                     throw new ParseException(String.format(MESSAGE_INVALID_DIFFICULTY, MESSAGE_VALID_DIFFICULTY));
                 }
-                profileWindowManager.setWeight("Difficulty: " + difficulty);
+                profileWindowManager.setDifficulty("Difficulty: " + difficulty);
                 newDifficulty = difficulty;
             }
             if (argMultimap.getValue(PREFIX_CALORIES).isPresent()) {
@@ -117,7 +117,7 @@ public class ModifyCommandParser implements Parser<ModifyCommand> {
                 if (!profileWindowManager.isValidCalories(calories)) {
                     throw new ParseException(String.format(MESSAGE_INVALID_CALORIES, MESSAGE_VALID_CALORIES));
                 }
-                profileWindowManager.setWeight("Calories: " + calories);
+                profileWindowManager.setCalories("Calories: " + calories);
                 newCalories = calories;
             }
             if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {
@@ -125,7 +125,7 @@ public class ModifyCommandParser implements Parser<ModifyCommand> {
                 if (!profileWindowManager.isValidDuration(duration)) {
                     throw new ParseException(String.format(MESSAGE_INVALID_DURATION, MESSAGE_VALID_DURATION));
                 }
-                profileWindowManager.setWeight("Duration: " + duration);
+                profileWindowManager.setDuration("Duration: " + duration);
                 newDuration = duration;
             }
 

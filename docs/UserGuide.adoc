@@ -82,7 +82,6 @@ Format: `add name/NAME type/TYPE duration/DURATION difficulty/DIFFICULTY equipme
 ****
 * The state tag "future" will automatically be added to any new workout.
 * The state tag is for the user to note the various things: future - untouched workouts, current - the workout that the user is currently focused on and completed - workouts that have been completed by the user.
-* Duplicate workouts includes are as f
 ****
 
 
@@ -325,6 +324,11 @@ Format: `modify [gender/GENDER] [username/USERNAME] [height/HEIGHT] [weight/WEIG
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 ****
+
+[NOTE]
+====
+The workout presets for calories, difficulty and duration accepts `any` as a input as well. It would simply mean that the user wants any amount of calories, duration or any difficulty.
+====
 
 Examples:
 

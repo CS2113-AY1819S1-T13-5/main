@@ -20,14 +20,14 @@ import seedu.address.model.workout.Duration;
 public class ProfileWindowManager {
 
     public static final String CALORIES_VALIDATION_REGEX =
-            "([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|1000)";
+            "([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|1000)|(any)";
     public static final String DURATION_VALIDATION_REGEX =
-            "([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|1000)[m]";
+            "(([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|1000)[m])|(any)";
     private static final String GENDER_VALIDATION_REGEX = "(male)|(female)";
     private static final String HEIGHT_VALIDATION_REGEX = "\\d{1}\\.\\d{2}";
     private static final String WEIGHT_VALIDATION_REGEX = "\\d{2,3}\\.\\d{1}";
     private static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}|'][\\p{Alnum} |' ]*";
-    private static final String DIFFICULTY_VALIDATION_REGEX = "(beginner)|(intermediate)|(advanced)";
+    private static final String DIFFICULTY_VALIDATION_REGEX = "(beginner)|(intermediate)|(advanced)|(any)";
 
     private static ProfileWindowManager singleInstance = null;
 
@@ -271,27 +271,30 @@ public class ProfileWindowManager {
     }
 
     /**
-     * Returns true if the first difficulty is more difficult than the second difficulty
+     * Returns true if the workout's difficulty is more difficult than the user's difficulty
      */
-    public boolean isMoreDifficult(String first, String second) {
-        if (first.matches("beginner")) {
+    public boolean isMoreDifficult(String workout, String user) {
+        if (user.matches("any")) {
             return false;
         }
-        if ((first.matches("intermediate")) && (second.matches("beginner"))) {
+        if (workout.matches("beginner")) {
+            return false;
+        }
+        if ((workout.matches("intermediate")) && (user.matches("beginner"))) {
             return true;
         }
-        if ((first.matches("advanced")) && ((second.matches("beginner"))
-                || (second.matches("intermediate")))) {
+        if ((workout.matches("advanced")) && ((user.matches("beginner"))
+                || (user.matches("intermediate")))) {
             return true;
         }
         return false;
     }
 
     /**
-     * Returns true if the first calories is higher than the second calories
+     * Returns true if the workout's calories is higher than the user's calories
      */
-    public boolean isHigherCalories(int first, int second) {
-        if (first > second) {
+    public boolean isHigherCalories(int workout, int user) {
+        if (workout > user) {
             return true;
         } else {
             return false;
@@ -299,10 +302,10 @@ public class ProfileWindowManager {
     }
 
     /**
-     * Returns true if the first duration is higher than the second duration
+     * Returns true if the workout's duration is higher than the user's duration
      */
-    public boolean isHigherDuration(int first, int second) {
-        if (first > second) {
+    public boolean isHigherDuration(int workout, int user) {
+        if (workout > user) {
             return true;
         } else {
             return false;
