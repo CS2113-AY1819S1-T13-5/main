@@ -34,6 +34,18 @@ public class SampleDataUtil {
                     getTagSet("future", "heavy", "morning"),
                     new Remark("This is a great upper body workout, targeting the muscles in arms,"
                             + " the shoulders, the center and your back.")
+            ),
+            new Workout(new Name("commando workout"), new Type("strength, cardio"), new Duration("20m"),
+                    new Difficulty("advanced"), new Equipment("dumbbell, bench"), new Muscle("triceps"),
+                    new Calories("150"),
+                    new Instruction("set 1: bicep curl reps: 4-6 set 2: tricep extension reps: 4-6"),
+                    getTagSet("future", "heavy"), new Remark("")
+            ),
+            new Workout(new Name("long distance run"), new Type("endurance, aerobic"), new Duration("30m"),
+                    new Difficulty("beginner"), new Equipment("NIL"), new Muscle("leg muscle"),
+                    new Calories("225"),
+                    new Instruction("run for 30 minutes without walking at your natural pace."),
+                    getTagSet("future", "heavy"), new Remark("")
             )
         };
     }

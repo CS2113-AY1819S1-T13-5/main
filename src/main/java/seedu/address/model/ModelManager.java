@@ -306,7 +306,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoModel() {
         undoWorkoutBook();
         undoTrackedDataList();
-        undoTrackedData();;
+        undoTrackedData();
     }
 
     @Override

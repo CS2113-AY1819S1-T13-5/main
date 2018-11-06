@@ -67,8 +67,10 @@ public class ProfileWindowManagerTest {
         ProfileWindowManager profileWindowManager;
         profileWindowManager = ProfileWindowManager.getInstance();
         String validStringInteger = "123";
+        String invalidStringInteger = "1234";
 
         assertEquals(profileWindowManager.convertStringIntoInt(validStringInteger), 123);
+        assertNotEquals(profileWindowManager.convertStringIntoInt(invalidStringInteger), 1235);
     }
 
     @Test
@@ -129,7 +131,7 @@ public class ProfileWindowManagerTest {
 
         assertEquals(expectedBmi, actualBmi, 0.1);
 
-        //Wrong expectedBMI should return not equal
+        //Wrong expectedBMI should be not equal
         assertNotEquals(expectedBmi, actualBmi2);
 
     }

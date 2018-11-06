@@ -53,7 +53,9 @@ public class CommandTestUtil {
     public static final String VALID_GENDER = "male";
     public static final String VALID_HEIGHT = "1.83";
     public static final String VALID_WEIGHT = "91.2";
-    public static final String VALID_PREFERRED_DIFFICULTY = "beginner";
+    public static final String VALID_DIFFICULTY = "beginner";
+    public static final String VALID_CALORIES = "150";
+    public static final String VALID_DURATION = "20m";
 
     public static final String VALID_TAG_MORNING = "morning";
     public static final String VALID_TAG_NIGHT = "night";
@@ -94,7 +96,10 @@ public class CommandTestUtil {
     public static final String INVALID_GENDER = "femal";
     public static final String INVALID_HEIGHT = "183";
     public static final String INVALID_WEIGHT = "911";
-    public static final String INVALID_PREFERRED_DIFFICULTY = "easy";
+    public static final String INVALID_DIFFICULTY = "easy";
+    public static final String INVALID_DURATION = "20";
+    public static final String INVALID_CALORIES = "0";
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -117,7 +122,6 @@ public class CommandTestUtil {
                         .withTags(VALID_TAG_NIGHT).build();
     }
 
-
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the result message matches {@code expectedMessage} <br>
@@ -132,6 +136,26 @@ public class CommandTestUtil {
             assertEquals(expectedMessage, result.feedbackToUser);
             assertEquals(expectedModel, actualModel);
             assertEquals(expectedCommandHistory, actualCommandHistory);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - the result message matches {@code expectedMessage} <br>
+     * - the {@code actualCommandHistory} remains unchanged.
+     * - the {@code actualAttribute} matches {@code expectedAttribute}
+     */
+    public static void assertModifyCommandSuccess(Command command, ArrayList<String> actualAttribute, Model actualModel,
+                                                  CommandHistory actualCommandHistory, String expectedMessage,
+                                                  ArrayList<String> expectedAttribute) {
+        CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
+        try {
+            CommandResult result = command.execute(actualModel, actualCommandHistory);
+            assertEquals(expectedMessage, result.feedbackToUser);
+            assertEquals(expectedCommandHistory, actualCommandHistory);
+            assertEquals(expectedAttribute, actualAttribute);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }

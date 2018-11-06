@@ -176,6 +176,14 @@ public class ProfileWindowManager {
         return difficulty;
     }
 
+    /**
+     * Trims the string gender
+     */
+    public String trimmedGender(String gender) {
+        gender = gender.replaceFirst("Gender: ", "");
+        return gender;
+    }
+
     public Optional<Calories> extractCalories() {
         return Optional.of(new Calories(calories.ownText().substring(10)));
     }
