@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CurrentCommand.MESSAGE_MULTIPLE_CURRENT_WORKOUT;
 import static seedu.address.testutil.TypicalIndexes.*;
 import static seedu.address.testutil.TypicalParameters.getTypicalTrackedDataList;
 import static seedu.address.testutil.TypicalWorkouts.getTypicalWorkoutBook;
@@ -50,6 +51,14 @@ public class CurrentCommandTest {
     }
 
     @Test
+    public void execute_preexistingCurrentWorkoutUnfilteredList_failure() {
+        CurrentCommand.setCurrentWorkout(true);
+        CurrentCommand currentCommand = new CurrentCommand(INDEX_TENTH_WORKOUT);
+
+        assertCommandFailure(currentCommand, model, commandHistory, MESSAGE_MULTIPLE_CURRENT_WORKOUT);
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredWorkoutList().size() + 1);
         CurrentCommand currentCommand = new CurrentCommand(outOfBoundIndex);
@@ -73,6 +82,16 @@ public class CurrentCommandTest {
         expectedModel.commitModel();
 
         assertCommandSuccess(currentCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_preexistingCurrentWorkoutFilteredList_failure() {
+        CurrentCommand.setCurrentWorkout(true);
+        showWorkoutAtIndex(model, INDEX_TENTH_WORKOUT);
+
+        CurrentCommand currentCommand = new CurrentCommand(INDEX_FIRST_WORKOUT);
+
+        assertCommandFailure(currentCommand, model, commandHistory, MESSAGE_MULTIPLE_CURRENT_WORKOUT);
     }
 
     @Test
