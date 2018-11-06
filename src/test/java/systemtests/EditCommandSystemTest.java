@@ -64,7 +64,7 @@
 //    public void edit() {
 //        Model model = getModel();
 //
-//        /* ----------------- Performing edit operation while an unfiltered list is being shown ---------------------- */
+        /* ----------------- Performing edit operation while an unfiltered list is being shown ---------------------- */
 //
 //        /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
 //         * -> edited
@@ -72,7 +72,8 @@
 //        Index index = INDEX_FIRST_WORKOUT;
 //        String command = "  " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB_WORKOUT
 //                + "  " + TYPE_DESC_BOB_WORKOUT + "  " + DURATION_DESC_BOB_WORKOUT + "  " + DIFFICULTY_DESC_BOB_WORKOUT
-//                + "  " + EQUIPMENT_DESC_BOB_WORKOUT + "  " + MUSCLE_DESC_BOB_WORKOUT + "  " + CALORIES_DESC_BOB_WORKOUT
+//                + "  " + EQUIPMENT_DESC_BOB_WORKOUT + "  " + MUSCLE_DESC_BOB_WORKOUT + "  "
+//                + CALORIES_DESC_BOB_WORKOUT
 //                + "  " + INSTRUCTION_DESC_BOB_WORKOUT + "  " + TAG_DESC_NIGHT + " ";
 //        Workout editedWorkout = new WorkoutBuilder(BOB_WORKOUT).withTags(VALID_TAG_NIGHT).build();
 //        assertCommandSuccess(command, index, editedWorkout);
@@ -102,7 +103,7 @@
 //        editedWorkout = new WorkoutBuilder(workoutToEdit).withTags().build();
 //        assertCommandSuccess(command, index, editedWorkout);
 //
-//        /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
+        /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 //
 //        /**
 //         * this test is causing an "Exception in Async Thread", can't find a way to solve it at the moment
@@ -126,7 +127,7 @@
 //
 //        /* --------------------- Performing edit operation while a workout card is selected ----------------------- */
 //
-//        /* Case: selects first card in the workout list, edit a workout -> edited, card selection remains unchanged but
+        /* Case: selects first card in the workout list, edit a workout -> edited, card selection remains unchanged but
 //         * browser url changes
 //         */
 //        showAllWorkouts();
@@ -134,7 +135,8 @@
 //        selectWorkout(index);
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY_WORKOUT + TYPE_DESC_AMY_WORKOUT
 //                + DURATION_DESC_AMY_WORKOUT + DIFFICULTY_DESC_AMY_WORKOUT + EQUIPMENT_DESC_AMY_WORKOUT
-//                + MUSCLE_DESC_AMY_WORKOUT + CALORIES_DESC_AMY_WORKOUT + INSTRUCTION_DESC_AMY_WORKOUT + TAG_DESC_MORNING;
+//                + MUSCLE_DESC_AMY_WORKOUT + CALORIES_DESC_AMY_WORKOUT + INSTRUCTION_DESC_AMY_WORKOUT
+//                + TAG_DESC_MORNING;
 //        // this can be misleading: card selection actually remains unchanged but the
 //        // browser's url is updated to reflect the new workout's name
 //        assertCommandSuccess(command, index, AMY_WORKOUT, index);
@@ -279,14 +281,14 @@
 //        assertCommandSuccess(command, toEdit, editedWorkout, null);
 //    }
 //
-//    /**
-//     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
-//     * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
-//     * 2. Asserts that the model related components are updated to reflect the workout at index {@code toEdit} being
-//     * updated to values specified {@code editedWorkout}.<br>
-//     * @param toEdit the index of the current model's filtered list.
-//     * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
-//     */
+    /**
+     * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
+     * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
+     * 2. Asserts that the model related components are updated to reflect the workout at index {@code toEdit} being
+     * updated to values specified {@code editedWorkout}.<br>
+     * @param toEdit the index of the current model's filtered list.
+     * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
+     */
 //    private void assertCommandSuccess(String command, Index toEdit, Workout editedWorkout,
 //                                      Index expectedSelectedCardIndex) {
 //        Model expectedModel = getModel();

@@ -58,9 +58,9 @@
 //    public void add() {
 //        Model model = getModel();
 //
-//        /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
+        /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 //
-//        /* Case: add a workout without tags to a non-empty workout book, command with leading spaces and trailing spaces
+        /* Case: add a workout without tags to a non-empty workout book, command with leading spaces and trailing spaces
 //         * -> added
 //         */
 //        Workout toAdd = AMY_WORKOUT;
@@ -95,19 +95,19 @@
 //        /* Case: add a workout, missing tags -> added */
 //        assertCommandSuccess(HOON_WORKOUT);
 //
-//        /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
+        /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
 //
 //        /* Case: filters the workout list before adding -> added */
 //        showWorkoutsWithName(KEYWORD_MATCHING_MEIER);
 //        assertCommandSuccess(IDA_WORKOUT);
 //
-//        /* ------------------------ Perform add operation while a workout card is selected -------------------------- */
+        /* ------------------------ Perform add operation while a workout card is selected -------------------------- */
 //
 //        /* Case: selects first card in the workout list, add a workout -> added, card selection remains unchanged */
 //        selectWorkout(Index.fromOneBased(1));
 //        assertCommandSuccess(CARL_WORKOUT);
 //
-//        /* ----------------------------------- Perform invalid add operations --------------------------------------- */
+        /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 //
 //        /* Case: add a duplicate workout -> rejected */
 //        command = WorkoutUtil.getAddCommand(HOON_WORKOUT);
