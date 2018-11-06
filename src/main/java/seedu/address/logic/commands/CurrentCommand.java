@@ -54,7 +54,7 @@ public class CurrentCommand extends Command {
             + "\n";
     public static final String MESSAGE_CONTINUE = "Do you still want to make this workout current?";
 
-    public static boolean currentWorkout;
+    private static boolean currentWorkout;
 
     private static boolean success = true;
     private final Index targetIndex;
