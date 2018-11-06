@@ -23,8 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TrackedData;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.workout.Workout;
 import seedu.address.model.WorkoutBook;
+import seedu.address.model.workout.Workout;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -78,8 +78,8 @@ public class CurrentCommandTest {
     public void execute_validIndexFilteredList_success() throws CommandException {
         showWorkoutAtIndex(model, INDEX_TENTH_WORKOUT);
 
-        Workout editedWorkout = CurrentCommand.
-                createEditedWorkout(model.getFilteredWorkoutList().get(INDEX_FIRST_WORKOUT.getZeroBased()));
+        Workout editedWorkout = CurrentCommand
+                .createEditedWorkout(model.getFilteredWorkoutList().get(INDEX_FIRST_WORKOUT.getZeroBased()));
         CurrentCommand currentCommand = new CurrentCommand(INDEX_FIRST_WORKOUT);
 
         String expectedMessage = String.format(CurrentCommand.MESSAGE_CURRENT_WORKOUT_SUCCESS, editedWorkout);
