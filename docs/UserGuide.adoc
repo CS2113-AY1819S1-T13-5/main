@@ -82,11 +82,17 @@ Format: `add name/NAME type/TYPE duration/DURATION difficulty/DIFFICULTY equipme
 ****
 * The state tag "future" will automatically be added to any new workout.
 * The state tag is for the user to note the various things: future - untouched workouts, current - the workout that the user is currently focused on and completed - workouts that have been completed by the user.
+* Duplicate workouts includes are as f
 ****
 
 
 [TIP]
 A workout can have any number of tags (minimally 1)
+
+[NOTE]
+====
+Duplicate workouts will include same name, different name but every other parameter is exactly the same.
+====
 
 Examples:
 

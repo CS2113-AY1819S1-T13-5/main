@@ -2,11 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CALORIES;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DIFFICULTY;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DURATION;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_GENDER;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_HEIGHT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_USERNAME;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_WEIGHT;
+import static seedu.address.commons.core.Messages.MESSAGE_VALID_CALORIES;
+import static seedu.address.commons.core.Messages.MESSAGE_VALID_DIFFICULTY;
+import static seedu.address.commons.core.Messages.MESSAGE_VALID_DURATION;
 import static seedu.address.commons.core.Messages.MESSAGE_VALID_GENDER;
 import static seedu.address.commons.core.Messages.MESSAGE_VALID_HEIGHT;
 import static seedu.address.commons.core.Messages.MESSAGE_VALID_USERNAME;
@@ -28,19 +34,15 @@ import org.jsoup.nodes.Element;
 import seedu.address.logic.commands.ModifyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ProfileWindowManager;
-import seedu.address.model.workout.Calories;
-import seedu.address.model.workout.Difficulty;
-import seedu.address.model.workout.Duration;
 
 /**
  * Parses input arguments and creates a new ModifyCommand object
  */
-public class ModifyCommandParser {
+public class ModifyCommandParser implements Parser<ModifyCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the {@code ModifyCommand}
      * and returns a {@code ModifyCommand} object for execution.
      * @throws ParseException if the user input does not conform the expected format
-     * @throws IOException if the file does not exist or has the wrong name
      */
 
     public ModifyCommand parse(String args) throws ParseException {
@@ -103,19 +105,28 @@ public class ModifyCommandParser {
                 newWeight = weight;
             }
             if (argMultimap.getValue(PREFIX_DIFFICULTY).isPresent()) {
-                Difficulty difficulty = ParserUtil.parseDifficulty(argMultimap.getValue(PREFIX_DIFFICULTY).get());
-                profileWindowManager.setDifficulty("Difficulty: " + difficulty.toString());
-                newDifficulty = difficulty.toString();
+                String difficulty = argMultimap.getValue(PREFIX_DIFFICULTY).get();
+                if (!profileWindowManager.isValidDifficulty(difficulty)) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_DIFFICULTY, MESSAGE_VALID_DIFFICULTY));
+                }
+                profileWindowManager.setWeight("Difficulty: " + difficulty);
+                newDifficulty = difficulty;
             }
             if (argMultimap.getValue(PREFIX_CALORIES).isPresent()) {
-                Calories calories = ParserUtil.parseCalories(argMultimap.getValue(PREFIX_CALORIES).get());
-                profileWindowManager.setCalories("Calories: " + calories.toString());
-                newCalories = calories.toString();
+                String calories = argMultimap.getValue(PREFIX_CALORIES).get();
+                if (!profileWindowManager.isValidCalories(calories)) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_CALORIES, MESSAGE_VALID_CALORIES));
+                }
+                profileWindowManager.setWeight("Calories: " + calories);
+                newCalories = calories;
             }
             if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {
-                Duration duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
-                profileWindowManager.setDuration("Duration: " + duration.toString());
-                newDuration = duration.toString();
+                String duration = argMultimap.getValue(PREFIX_DURATION).get();
+                if (!profileWindowManager.isValidDuration(duration)) {
+                    throw new ParseException(String.format(MESSAGE_INVALID_DURATION, MESSAGE_VALID_DURATION));
+                }
+                profileWindowManager.setWeight("Duration: " + duration);
+                newDuration = duration;
             }
 
             DecimalFormat df = new DecimalFormat("#.#");

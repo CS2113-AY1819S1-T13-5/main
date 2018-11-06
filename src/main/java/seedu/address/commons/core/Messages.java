@@ -10,6 +10,12 @@ public class Messages {
     public static final String MESSAGE_INVALID_WORKOUT_DISPLAYED_INDEX = "The workout index provided is invalid";
     public static final String MESSAGE_WORKOUTS_LISTED_OVERVIEW = "%1$d workouts listed!";
     public static final String MESSAGE_WORKOUTS_SORTED = "Sorted workouts";
+    public static final String MESSAGE_INVALID_CALORIES = "Invalid Calories format! \n%1$s";
+    public static final String MESSAGE_VALID_CALORIES = "Calories must a positive integer"
+            + " from 1 to 1000, inclusive of 1 and 1000.";
+    public static final String MESSAGE_INVALID_DURATION = "Invalid Duration format! \n%1$s";
+    public static final String MESSAGE_VALID_DURATION = "Duration can only be in this format: 20m, from 1m to 1000m,"
+            + " inclusive of 1m and 1000m.";
     public static final String MESSAGE_INVALID_GENDER = "Invalid Gender format! \n%1$s";
     public static final String MESSAGE_VALID_GENDER = "Gender should either be male or female.";
     public static final String MESSAGE_INVALID_WEIGHT = "Invalid Weight format! \n%1$s";

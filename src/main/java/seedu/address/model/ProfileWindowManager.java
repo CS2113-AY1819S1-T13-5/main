@@ -19,10 +19,15 @@ import seedu.address.model.workout.Duration;
  */
 public class ProfileWindowManager {
 
+    public static final String CALORIES_VALIDATION_REGEX =
+            "([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|1000)";
+    public static final String DURATION_VALIDATION_REGEX =
+            "([1-9]|[1-8][0-9]|9[0-9]|[1-8][0-9]{2}|9[0-8][0-9]|99[0-9]|1000)[m]";
     private static final String GENDER_VALIDATION_REGEX = "(male)|(female)";
     private static final String HEIGHT_VALIDATION_REGEX = "\\d{1}\\.\\d{2}";
     private static final String WEIGHT_VALIDATION_REGEX = "\\d{2,3}\\.\\d{1}";
     private static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}|'][\\p{Alnum} |' ]*";
+    private static final String DIFFICULTY_VALIDATION_REGEX = "(beginner)|(intermediate)|(advanced)";
 
     private static ProfileWindowManager singleInstance = null;
 
@@ -214,6 +219,27 @@ public class ProfileWindowManager {
     public int convertStringIntoInt(String string) {
         int integer = Integer.parseInt(string);
         return integer;
+    }
+
+    /**
+     * Returns true if the given string is a valid calories
+     */
+    public boolean isValidCalories(String calories) {
+        return calories.toLowerCase().matches(CALORIES_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if the given string is a valid difficulty
+     */
+    public boolean isValidDifficulty(String difficulty) {
+        return difficulty.toLowerCase().matches(DIFFICULTY_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if the given string is a valid difficulty
+     */
+    public boolean isValidDuration(String duration) {
+        return duration.toLowerCase().matches(DURATION_VALIDATION_REGEX);
     }
 
     /**

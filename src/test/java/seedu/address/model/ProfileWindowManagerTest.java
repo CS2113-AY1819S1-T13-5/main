@@ -67,10 +67,12 @@ public class ProfileWindowManagerTest {
         ProfileWindowManager profileWindowManager;
         profileWindowManager = ProfileWindowManager.getInstance();
         String validStringInteger = "123";
-        String invalidStringInteger = "1234";
+        String validUpperStringInteger = "124";
+        String validLowerStringInteger = "124";
 
-        assertEquals(profileWindowManager.convertStringIntoInt(validStringInteger), 123);
-        assertNotEquals(profileWindowManager.convertStringIntoInt(invalidStringInteger), 1235);
+        assertEquals(123, profileWindowManager.convertStringIntoInt(validStringInteger));
+        assertNotEquals(123, profileWindowManager.convertStringIntoInt(validUpperStringInteger));
+        assertNotEquals(123, profileWindowManager.convertStringIntoInt(validLowerStringInteger));
     }
 
     @Test
@@ -112,9 +114,9 @@ public class ProfileWindowManagerTest {
         String sameDifficulty = "beginner";
         assertTrue(profileWindowManager.isMoreDifficult(higherDifficulty, lowerDifficulty));
 
-        //Should return false since lowerDifficult is not higher than higherDifficult
+        //Should return false since lowerDifficult is not more difficult than higherDifficult
         assertFalse(profileWindowManager.isMoreDifficult(lowerDifficulty, higherDifficulty));
-        //Should return false since lowerDifficult is not higher than sameDifficult
+        //Should return false since lowerDifficult is not more difficult than sameDifficult
         assertFalse(profileWindowManager.isMoreDifficult(lowerDifficulty, sameDifficulty));
     }
 
