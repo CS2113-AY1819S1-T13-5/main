@@ -936,7 +936,7 @@ It implements following commands:<br></p>
 <p><code>SortCommand()</code> -Sorts the current workout book</p>
 </li>
 <li>
-<p><code>FilterCommand()</code> -Filters the workout book</p>
+<p><code>FilterCommand()</code> -Filters the workout book with three parameters (duration, equipment, type)</p>
 </li>
 <li>
 <p><code>SelectCommand()</code> -Select the workout by index number</p>
@@ -947,26 +947,34 @@ It implements following commands:<br></p>
 </ul>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the traversing mechanism behaves at each step.</p>
+<p>Given below is an example usage scenario and how the traversing and remark mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application, <code>add</code> some workouts to the workout book, then <code>sort</code> the workout.
-The sort command calls the <code>sortFilteredWorkoutList()</code> of <code>Model</code> to sort the workout based on the names in alphabetical order.</p>
+<p>Step 1. The user launches the application, <code>add</code> some workouts to the workout book, by executing <code>add name/commando workout
+type/strength, cardio duration/20m difficulty/advanced equipment/dumbbell, bench muscle/bicep, tricep calories/150
+instruction/set 1: bicep curl reps: 4-6 set 2: tricep extension reps: 4-6 tag/heavy</code>, then <code>sort</code> the workout.
+The sort command calls the <code>sortFilteredWorkoutList()</code> of <code>Model</code> to sort the workout based on the names in ascending alphabetical order.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>filter</code> to find the workouts that contain <code>duration</code>, <code>equipment</code> and <code>type</code>.</p>
+<p>Step 2. The user executes <code>filter</code> to find the workouts with parameters of <code>duration</code>, <code>equipment</code> and <code>type</code>.
+i.e. <code>filter type/strength duration/20m equipment/dumbbell</code> The filter command uses the functional interface Predicate to test
+whether the workouts contain keywords, and return the workouts that include keywords. The <code>DurationPredicate</code>, <code>EquipmentPredicate</code>,
+and <code>TypePredicate</code> will be generated based on the UserInput which parsed by <code>FilterCommandParser</code>, and then the Predicates
+will be passed to <code>Filtercommand</code>. It collects the workouts that contain all three keywords by Predicate chaining.</p>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>remark</code> to remark a workout</p>
+<p>Step 3. The user executes <code>remark</code> to remark a workout. In remark command, the createRemarkedCommand
+is called to create a workout which is remarked.Then, it calls <code>updateWorkout()</code> of <code>Model</code> to update the workout that is remarked.
+Next, the remark command calls <code>updateFilteredWorkoutList()</code> of <code>Model</code> to update the list of workouts.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/traversingSequenceDiagram.png" alt="traversingSequenceDiagram" width="650">
+<img src="images/traversingSequenceDiagram.png" alt="traversingSequenceDiagram" width="800">
 </div>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/HighLevelRemarkSequenceDiagrams.png" alt="HighLevelRemarkSequenceDiagrams" width="650">
+<img src="images/HighLevelRemarkSequenceDiagrams.png" alt="HighLevelRemarkSequenceDiagrams" width="800">
 </div>
 </div>
 </div>
@@ -2681,4 +2689,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 15:15:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 15:27:11 UTC</div></div></div></body></html>

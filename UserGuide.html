@@ -434,7 +434,10 @@ Format: <code>filter type/TYPE duration/DURATION equipment/EQUIPMENT</code></p>
 <p>The order of the keywords does not matter. e.g. <code>filter type/strength duration/20m</code> will match <code>filter duration/20m type/strength</code></p>
 </li>
 <li>
-<p>Duration, equipment, type are searched.</p>
+<p>Three parameters: Duration, equipment, type are searched.</p>
+</li>
+<li>
+<p>If the keywords are more than one word, only the first word will be filtered.</p>
 </li>
 </ul>
 </div>
@@ -448,6 +451,14 @@ Format: <code>filter type/TYPE duration/DURATION equipment/EQUIPMENT</code></p>
 <li>
 <p><code>filter duration/20m equipment/dumbbell type/strength</code><br>
 Returns any workout having duration of <code>20m</code>, with equipment of <code>dumbbell</code> and of type <code>strength</code>.</p>
+</li>
+<li>
+<p><code>filter duration/20m type/strength equipment/dumbbell</code> is the same as <code>filter duration/20m
+equipment/dumbbell type/strength</code>.</p>
+</li>
+<li>
+<p><code>filter duration/20m type/strength equipment/free weights</code> is the same as <code>filter duration/20m
+type/strength equipment/free</code>.</p>
 </li>
 </ul>
 </div>
@@ -981,4 +992,4 @@ There is no need to save manually.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 15:15:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 15:27:11 UTC</div></div></div></body></html>
