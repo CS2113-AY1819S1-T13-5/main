@@ -134,6 +134,9 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <li>
 <p><strong><em>GENDER</em></strong> should only be either male or female.</p>
 </li>
+<li>
+<p><strong><em>MODE</em></strong> should only be either <code>all</code>, <code>single</code> or <code>multiple INTEGER</code> where INTEGER are positive integers from 1 to 1000. E.g <code>multiple 777</code>.</p>
+</li>
 </ul>
 </div>
 </li>
@@ -762,21 +765,116 @@ Change your user profile&#8217;s username to apple, height to 1.82m and update t
 <div class="sect2">
 <h3 id="recommending-a-workout-code-recommend-code"><a class="link" href="#recommending-a-workout-code-recommend-code">3.17. Recommending a workout : <code>recommend</code></a></h3>
 <div class="paragraph">
-<p>Recommend a workout from the existing workouts.<br>
-Format: <code>recommend [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]</code></p>
+<p>Recommends workout from the workout book.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Recommend command only recommends workout from the current workout list.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To recommend from the entire list of workouts, you should first type <code>list</code> in the command box and press <kbd>Enter</kbd> to
+retrieve the entire list of workouts.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>There are two ways to use the <code>recommend</code> command.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Accepts any combinations of the three prefixes including zero combinations.</p>
+<p>Recommend directly from the Workout Presets in your profile.</p>
 </li>
 <li>
-<p>If you did not input any prefixes, the workout recommended will be according to the fields under the Workout Presets in your profile.</p>
+<p>Recommend through the inputs in the command box.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Recommend directly from the Workout Presets in your profile</strong></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>recommend</code></p>
+</div>
+<div id="fig-UserProfileCard" class="imageblock">
+<div class="content">
+<img src="images/userprofilecard.png" alt="userprofilecard" width="450">
+</div>
+<div class="title">Figure 1. After you have provided the appropriate properties in your profile.</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br>
+Type <code>recommend</code> in the command box, press <kbd>Enter</kbd> and you have Figure 2.<br>
+&#160;<br></p>
+</div>
+<div id="fig-NoPrefixRecommend" class="imageblock">
+<div class="content">
+<img src="images/noprefixrecommend.PNG" alt="noprefixrecommend" width="450">
+</div>
+<div class="title">Figure 2. Recommended result with exactly the same properties as the workout presets in Figure 1.</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Recommend through the inputs in the command box</strong></p>
+</div>
+<div class="paragraph">
+<p>There are two ways to recommend through the inputs.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Recommend without optional prefixes.</p>
 </li>
 <li>
-<p>The workout recommended has exactly the same inputs as the one you have entered E.g. <code>recommend difficulty/beginner</code> will only recommend the workout that have difficulty level as beginner.</p>
+<p>Recommend with optional prefixes.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Recommend without optional prefixes</strong></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>recommend mode/MODE [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>You can choose to recommend single, multiple or even all workouts based on the specified <code>MODE</code>.</p>
+</li>
+<li>
+<p>Workout recommended will have properties exactly the same as the inputs you have entered in the command box.</p>
 </li>
 </ul>
 </div>
@@ -788,16 +886,55 @@ Format: <code>recommend [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DU
 <div class="ulist">
 <ul>
 <li>
-<p><code>recommend difficulty/beginner</code><br>
+<p><code>recommend mode/single difficulty/beginner</code><br>
 Recommends a beginner workout.</p>
 </li>
 <li>
-<p><code>recommend duration/10m calories/150</code><br>
-Recommends a 10 minute workout that burns 150 calories.</p>
+<p><code>recommend mode/multiple 2 duration/10m calories/150</code><br>
+Recommends two 10 minute workout that burns 150 calories.</p>
 </li>
 <li>
-<p><code>recommend duration/35m calories/200 difficulty/advanced</code><br>
-Recommends an advanced 35 minute workout that burns 200 calories.</p>
+<p><code>recommend mode/all duration/35m calories/200 difficulty/advanced</code><br>
+Recommends all advanced 35 minute workout that burns 200 calories.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Recommend with optional prefixes</strong></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>recommend mode/MODE ocalories or calories/CALORIES odifficulty or difficulty/DIFFICULTY oduration or duration/DURATION</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>You can choose to recommend single, multiple or even all workouts based on the specified <code>MODE</code>.</p>
+</li>
+<li>
+<p>Workout recommended will try to match as much as possible to the inputs you have entered in the command box.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>recommend mode/single calories/150 difficulty/intermediate oduration/10m</code><br>
+Recommends a 10 minute intermediate workout if there exist this workout or else it will recommend an intermediate workout that burns 150 calories.</p>
+</li>
+<li>
+<p><code>recommend mode/multiple 3 calories/125 odifficulty/beginner oduration/10m</code><br>
+Recommends three 10 minute beginner workouts that burns 125 calories if there exist these workouts or else it will recommend the next best alternative.</p>
+</li>
+<li>
+<p><code>recommend mode/all ocalories/160 odifficulty/advanced oduration/10m</code><br>
+Recommends all the 10 minute advanced workouts that burns 160 calories if there exist these workouts or else it will recommend the next best alternative.</p>
 </li>
 </ul>
 </div>
@@ -992,4 +1129,4 @@ There is no need to save manually.</p>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 17:58:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 18:09:37 UTC</div></div></div></body></html>
