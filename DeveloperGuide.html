@@ -84,6 +84,7 @@
 <li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
 <li><a href="#deleting-a-person">H.2. Deleting a person</a></li>
 <li><a href="#saving-data">H.3. Saving data</a></li>
+<li><a href="#features-commands">H.4. Features/Commands</a></li>
 </ul>
 </li>
 </ul>
@@ -895,7 +896,7 @@ The sequence diagram of this entire process can be seen below:</p>
 </div>
 <div class="paragraph">
 <p><code>recommend</code> command is integrated with the profile. User can find a workout with the respective data types <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> if specified under the workout presets in the profile.
-After that, user just have to type <code>recommend</code> in the command box, press enter to get the workout.
+After that, user just have to type <code>recommend</code> in the command box and press enter to get the workout.
 Since the sequence is very similar to single mode recommend, the sequence diagram of this entire process can be seen in Figure 12 and 13.</p>
 </div>
 </div>
@@ -2826,5 +2827,87 @@ Expected: Similar to previous.</p>
 <p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
+<div class="sect2">
+<h3 id="features-commands"><a class="link" href="#features-commands">H.4. Features/Commands</a></h3>
+<div class="sect3">
+<h4 id="recommending-workouts"><a class="link" href="#recommending-workouts">H.4.1. Recommending workouts</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Recommending a workout with the respective <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> that isn&#8217;t in the workout list.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Ensure that the respective <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> you have chosen aren&#8217;t the same as any of the data types contained in the workouts in the workout list.</p>
+</li>
+<li>
+<p>The example used here assumes that none of the workouts in the workout list contains these data types.</p>
+</li>
+<li>
+<p>Test case: <code>recommend mode/single calories/999</code><br>
+Expected: A message saying that the workout does not exist in the WorkoutBook will be shown in the status message.</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 16:31:58 UTC</div></div></div></body></html>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Recommending a workout that omits the mandatory prefix <code>Mode</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Note that this isn&#8217;t referring to recommending from the profile which does not require the prefix <code>Mode</code>.</p>
+</li>
+<li>
+<p>Ensure that the respective <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> you have chosen are the same as the data types contained in at least one of the workouts in the workout list.</p>
+</li>
+<li>
+<p>The example used here assumes that at least one of the workouts contains calories of 150.</p>
+</li>
+<li>
+<p>Test case: <code>recommend calories/150</code><br>
+Expected: A message saying that an invalid format is used and proposing the correct format will be shown in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Recommending a workout from the profile.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Ensure that the respective <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> you have in the workout presets in the profile are the same as the data types contained in at least one of the workouts in the workout list.</p>
+</li>
+<li>
+<p>Test case: <code>recommend</code><br>
+Expected: A message saying workout is recommended will be shown in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 19:38:46 UTC</div></div></div></body></html>

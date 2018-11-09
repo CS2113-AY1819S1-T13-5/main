@@ -204,6 +204,20 @@ retrieve the entire list of workouts.
 </tr>
 </table>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When one workout is requested (either through the user&#8217;s WorkoutPresets or the user input with a specified <code>Mode</code> of single) and there is more than one matching workout, a random matching workout is retrieved.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>There are two ways to use the <code>recommend</code> command.</p>
 </div>
@@ -452,10 +466,47 @@ The sequence diagram of this entire process can be seen below:</p>
 </div>
 <div class="paragraph">
 <p><code>recommend</code> command is integrated with the profile. User can find a workout with the respective data types <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> if specified under the workout presets in the profile.
-After that, user just have to type <code>recommend</code> in the command box, press enter to get the workout.
+After that, user just have to type <code>recommend</code> in the command box and press enter to get the workout.
 Since the sequence is very similar to single mode recommend, the sequence diagram of this entire process can be seen in Figure 12 and 13.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+
+</div>
+<div class="sect3">
+<h4 id="aspect-recommendation-systems"><a class="link" href="#aspect-recommendation-systems">Aspect: Recommendation Systems</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Recommend based on user&#8217;s input.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The user has more control over what they want in the recommended workout, and the implementation is simple.</p>
+</li>
+<li>
+<p>Cons: The user has to take more steps to successfully get a recommended workout of their choice. (Always has to key in the inputs)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Recommend based on user&#8217;s past interactions with the system.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The optimal workout will be recommended immediately without supplying any data types.</p>
+</li>
+<li>
+<p>Cons: Implementation requires processing big data which has to be stored in a database and all of these processes are complicated.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 16:31:58 UTC</div></div></div></body></html>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 19:38:46 UTC</div></div></div></body></html>
