@@ -812,61 +812,63 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>There are several functionalities in the <code>recommend</code> command and to invoke certain functionalities, different combinations of inputs are considered.
-When the user keys in the input in the command box, the user input is parsed in the <code>RecommendCommandParser</code>.
-An instance of <code>RecommendArguments</code> class will be instantiated corresponding to the user input and this instance is then passed to <code>RecommendCommand</code> in the <code>Logic</code> component.</p>
+<p>The user input is parsed in <code>RecommendCommandParser</code> into different data types in the workout book. The data types that are relevant here are <code>Mode</code>, <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code>.
+A <code>RecommendArguments</code> instance is created to store these 4 different data types and is passed to the <code>RecommendCommand</code> in the <code>Logic</code> component.
+Given below is a class diagram containing <code>RecommendArguments</code> and the 4 different data types.</p>
+</div>
+<div id="fig-RecommendCommandCD" class="imageblock">
+<div class="content">
+<img src="images/CDForRecommendArguments.png" alt="CDForRecommendArguments" width="500">
+</div>
+<div class="title">Figure 10. Class Diagram for <code>recommend</code> command.</div>
 </div>
 <div class="paragraph">
-<p>In order to recommend a suitable workout for a given combination of inputs which are stored in the <code>RecommendArguments</code> instance, we must first find out what are the suitable workouts present in our current workout list.
-The instance of <code>RecommendArguments</code> is passed through a <code>getFinalFilteredInternalList()</code> method in the <code>Model</code> component.
-This method works by filtering the current workout list to match the user inputs as much as possible to return a filtered list instead of mutating the original copy.</p>
+<p>&#160;<br></p>
 </div>
 <div class="paragraph">
-<p>Here, we introduce the notion of optional prefixes where users are allowed to indicate whether certain properties are mandatory or good to have in their workouts.
-By allowing users the flexibility to decide the mandatory properties they want in a workout, we can cut down the number of steps taken by a user to arrive at their optimal recommended workout.
-The worst case scenario of finding an optimal workout takes approximately 2^(n) steps, where n is the number of properties which is 3 in this case.
-There are different levels in what workouts are to be recommended and considered. The algorithm ensures that the workout recommended will be of the highest level or the greatest match.</p>
-</div>
-<div class="paragraph">
-<p>There are two different behavioral sequences that will arise under certain combinations of inputs. The activity diagram below depicts the execution flow of the <code>recommend</code> command.</p>
+<p>The <code>RecommendArguments</code> instance is passed to a <code>getFinalFilteredInternalList()</code> method in the <code>Model</code> component.
+This method filters the current workout list in the <code>UI</code> by <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> if specified by the user, and returns a new list of filtered workouts.
+The original workout list in the <code>UI</code> is not modified. The activity diagram below depicts the execution flow of the <code>recommend</code> command.</p>
 </div>
 <div id="fig-RecommendCommandAD" class="imageblock">
 <div class="content">
 <img src="images/ADForRecommendCommand.png" alt="ADForRecommendCommand" width="800">
 </div>
-<div class="title">Figure 10. Activity Diagram for <code>recommend</code> command.</div>
+<div class="title">Figure 11. Activity Diagram for <code>recommend</code> command.</div>
 </div>
 <div class="paragraph">
 <p>&#160;<br></p>
 </div>
 <div class="paragraph">
-<p>Shown below is the component interactions for the <code>recommend</code> command where the path taken is with the condition of recommending directly from Workout Presets in the user&#8217;s profile or through the inputs with a specified mode of single.</p>
+<p>On command execution, a new <code>JumpToRecommendListRequestEvent</code> is created and posted to <code>EventsCenter</code>.
+Shown below is the component interactions for the <code>recommend mode/single calories/150</code> command.</p>
 </div>
 <div id="fig-RecommendEventSD" class="imageblock">
 <div class="content">
 <img src="images/SDForRecommendEvent.png" alt="SDForRecommendEvent" width="700">
 </div>
-<div class="title">Figure 11. Component interactions for <code>recommend</code> command (part 1).</div>
+<div class="title">Figure 12. Component interactions for <code>recommend mode/single calories/150</code> command (part 1).</div>
 </div>
 <div class="paragraph">
 <p>&#160;<br></p>
 </div>
 <div class="paragraph">
-<p>The event then propagates through <code>EventsCenter</code> to the <code>UI</code>. The <code>UI</code> will call <code>handleJumpToRecommendListRequestEvent()</code> to handle the event, which eventually results in the the <code>UI</code> being updated to scroll to the workout in the <code>WorkoutListPanel</code> and selecting it.
+<p>The event then propagates through <code>EventsCenter</code> to the <code>WorkoutListPanel</code>.
+The <code>WorkoutListPanel</code> will call <code>handleJumpToRecommendListRequestEvent()</code> and update the <code>UI</code> to scroll to and select the workout.
 The process is shown in the Figure below.</p>
 </div>
 <div id="fig-RecommendEventHandlingSD" class="imageblock">
 <div class="content">
 <img src="images/SDForRecommendEventHandling.png" alt="SDForRecommendEventHandling" width="500">
 </div>
-<div class="title">Figure 12. Component interactions for <code>recommend</code> command (part 2).</div>
+<div class="title">Figure 13. Component interactions for <code>recommend mode/single calories/150</code> command (part 2).</div>
 </div>
 <div class="paragraph">
 <p>&#160;<br></p>
 </div>
 <div class="paragraph">
 <p>For the other path, the filtered list returned from the <code>getFinalFilteredInternalList()</code> is passed to <code>WorkoutsPredicate</code> which compares every workout in the filtered list to the entire list of workouts.
-The predicate will only be true when the workout matches at least one of the workouts in the filtered list.
+The predicate will only be true when the workout matches AT LEAST ONE of the workouts in the filtered list.
 The implementation of that can be seen below:</p>
 </div>
 <div class="listingblock">
@@ -879,17 +881,22 @@ The implementation of that can be seen below:</p>
 </div>
 </div>
 <div class="paragraph">
-<p><code>WorkoutsPredicate</code> instance is then passed to <code>updateFilteredWorkoutList()</code> method of <code>Model</code> to change the entire list of workouts displayed to those that matched at least one of the workouts.
+<p><code>WorkoutsPredicate</code> instance is then passed to <code>updateFilteredWorkoutList()</code> method of <code>Model</code> to modify the entire list of workouts displayed to those that matched at least one of the workouts.
 The sequence diagram of this entire process can be seen below:</p>
 </div>
 <div id="fig-RecommendNonEventSD" class="imageblock">
 <div class="content">
 <img src="images/SDForRecommendNonEvent.png" alt="SDForRecommendNonEvent" width="900">
 </div>
-<div class="title">Figure 13. Interactions inside the <code>Logic</code> component for the <code>recommend mode/single calories/150</code> command.</div>
+<div class="title">Figure 14. Interactions inside the <code>Logic</code> component for the <code>recommend mode/single calories/150</code> command.</div>
 </div>
 <div class="paragraph">
-<p>&#160;</p>
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p><code>recommend</code> command is integrated with the profile. User can find a workout with the respective data types <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> if specified under the workout presets in the profile.
+After that, user just have to type <code>recommend</code> in the command box, press enter to get the workout.
+Since the sequence is very similar to single mode recommend, the sequence diagram of this entire process can be seen in Figure 12 and 13.</p>
 </div>
 </div>
 <div class="sect3">
@@ -914,11 +921,11 @@ The sequence diagram of this entire process can be seen below:</p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Recommend based on user&#8217;s interactions with the system.</p>
+<p><strong>Alternative 2:</strong> Recommend based on user&#8217;s past interactions with the system.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: The optimal workout will be recommended immediately without supplying any inputs.</p>
+<p>Pros: The optimal workout will be recommended immediately without supplying any data types.</p>
 </li>
 <li>
 <p>Cons: Implementation requires processing big data which has to be stored in a database and all of these processes are complicated.</p>
@@ -962,7 +969,7 @@ The sequence diagram of this entire process can be seen below:</p>
 <div class="content">
 <img src="images/ProfileCommand.PNG" alt="ProfileCommand" width="800">
 </div>
-<div class="title">Figure 14. Interactions inside <code>Logic</code> component for the <strong><code>profile</code></strong> command</div>
+<div class="title">Figure 15. Interactions inside <code>Logic</code> component for the <strong><code>profile</code></strong> command</div>
 </div>
 </div>
 <div class="sect4">
@@ -974,7 +981,7 @@ The sequence diagram of this entire process can be seen below:</p>
 <div class="content">
 <img src="images/ClickProfile.PNG" alt="ClickProfile" width="600">
 </div>
-<div class="title">Figure 15. Interactions inside <code>UI</code> component when user clicks profile</div>
+<div class="title">Figure 16. Interactions inside <code>UI</code> component when user clicks profile</div>
 </div>
 </div>
 <div class="sect4">
@@ -986,7 +993,7 @@ The sequence diagram of this entire process can be seen below:</p>
 <div class="content">
 <img src="images/F2Profile.PNG" alt="F2Profile" width="700">
 </div>
-<div class="title">Figure 16. Interactions inside <code>UI</code> component when user presses <code>F2</code></div>
+<div class="title">Figure 17. Interactions inside <code>UI</code> component when user presses <code>F2</code></div>
 </div>
 </div>
 </div>
@@ -1049,7 +1056,7 @@ to the temporary html file, then overwrite the current <code>ProfileWindow.html<
 <div class="content">
 <img src="images/ModifyClassDiagram.png" alt="ModifyClassDiagram" width="700">
 </div>
-<div class="title">Figure 17. Class diagram that shows the how the different class interacts when executing modify command</div>
+<div class="title">Figure 18. Class diagram that shows the how the different class interacts when executing modify command</div>
 </div>
 </div>
 </div>
@@ -1141,7 +1148,7 @@ It implements following commands:<br></p>
 <div class="content">
 <img src="images/CurrentCommandSD.png" alt="CurrentCommandSD" width="800">
 </div>
-<div class="title">Figure 18. Interactions inside <code>Logic</code> component when pressing <code>current</code></div>
+<div class="title">Figure 19. Interactions inside <code>Logic</code> component when pressing <code>current</code></div>
 </div>
 <div class="paragraph">
 <p>Step 3. The user executes the complete command to change the <code>current</code> tag in the workout as specified by the index number to <code>completed</code>.</p>
@@ -1150,7 +1157,7 @@ It implements following commands:<br></p>
 <div class="content">
 <img src="images/CompleteCommandSD.png" alt="CompleteCommandSD" width="800">
 </div>
-<div class="title">Figure 19. Interactions inside <code>Logic</code> component when pressing <code>complete</code></div>
+<div class="title">Figure 20. Interactions inside <code>Logic</code> component when pressing <code>complete</code></div>
 </div>
 <div class="ulist">
 <ul>
@@ -1337,7 +1344,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 20. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 21. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2820,4 +2827,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 13:50:12 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 14:15:23 UTC</div></div></div></body></html>

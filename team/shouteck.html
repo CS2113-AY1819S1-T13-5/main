@@ -1,0 +1,461 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Ting Shou Teck - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">WorkoutBook</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S1-T13-5/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Ting Shou Teck - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-workoutbook"><a class="link" href="#project-workoutbook">PROJECT: WorkoutBook</a></h2>
+<div class="sectionbody">
+<hr>
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Are you a professional athlete who is too lazy to manually search through your workout list to find your favourite workout?
+Are you an amateur who just started working out and doesn&#8217;t know where to begin?
+Or are you just someone who prefers to have all of your workouts in one place and organized in a tidy manner. Then WorkoutBook is the solution for you!
+WorkoutBook is a desktop address book application used for anyone who does workouts to manage their workouts. The user interacts with it using a CLI, and it has a GUI created with JavaFX.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major enhancement</strong>: added <strong>the ability to recommend workouts</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p><span class="underline">What it does</span>: Allows the user to find workouts that have the respective <code>Calories</code>, <code>Duration</code> and <code>Difficulty</code>.
+Moreover, user is also able to find workouts that have the respective <code>Calories</code>, <code>Duration</code> and <code>Difficulty</code> under the workout presets in the user profile.
+With the notion of optional parameters, it allows the user the flexibility to decide whether any of these <code>Calories</code>, <code>Duration</code> and <code>Difficulty</code> is mandatory or good to have when finding workouts.</p>
+</li>
+<li>
+<p><span class="underline">Justification</span>: User is able to conveniently find workouts to start if the user knows the respective <code>Calories</code>, <code>Duration</code> and <code>Difficulty</code> the user would want in a new workout.</p>
+</li>
+<li>
+<p><span class="underline">Highlights</span>: This feature required an in-depth analysis of design alternatives where I implemented a builder pattern to accommodate the vast amount of different combinations of constructors that have to be called. Moreover, I have to decide on a meaningful way of expressing user inputs on the CLI so that it is intuitive to the user.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor enhancement</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Implemented a Facade pattern to provide a simpler interface to work on called <code>ProfileWindowManager</code> where it handles the methods of the user profile. (<a href="https://github.com/CS2103JAN2018-F09-B2/main/pull/12">#12</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Code contributed</strong>: [<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=shouteck">Project Code Dashboard</a>]</p>
+</li>
+<li>
+<p><strong>Other contributions</strong>:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed releases <code>v1.1</code> - <code>v1.3</code> on GitHub.</p>
+</li>
+<li>
+<p>Morphed the application from AddressBook to WorkoutBook, which required changing the whole code base while maintaining interaction of components as well as correctness of the whole project.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Added <code>Command Format</code> in the User Guide for a summary of parameters that are used in our application. (<a href="https://github.com/CS2113-AY1819S1-T13-5/main/pull/151">#151</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="exampleblock include">
+<div class="content">
+<div class="paragraph">
+<p><strong>Command Format</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add name/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add name/commando workout</code>.</p>
+</li>
+<li>
+<p>Below is a list of the remaining parameters with examples of their acceptable formats:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong><em>CALORIES</em></strong> are positive integers from 1 to 1000. E.g. <code>120</code>, <code>500</code>, etc.</p>
+</li>
+<li>
+<p><strong><em>DIFFICULTY</em></strong> and <strong><em>PREFERRED_DIFFICULTY</em></strong> should only be either beginner, intermediate or advanced.</p>
+</li>
+<li>
+<p><strong><em>DURATION</em></strong> should only be in this format: E.g. <code>20m</code>, <code>500m</code>, etc from 1m to 1000m.</p>
+</li>
+<li>
+<p><strong><em>EQUIPMENT</em></strong> is a list of equipment separated by commas, and it should not be blank. E.g. <code>dumbbell,bench,mat</code> and <code>dumbbell, bench, mat</code> are valid.</p>
+</li>
+<li>
+<p><strong><em>MUSCLE</em></strong> is a list of muscle groups separated by commas, and it should not be blank. E.g. <code>triceps,biceps,back</code> and <code>triceps, biceps, back</code> are valid.</p>
+</li>
+<li>
+<p><strong><em>TYPE</em></strong> is a list of workout types separated by commas, and it should not be blank. E.g. <code>cardio,strength,balance</code> and <code>cardio, strength, balance</code> are valid.</p>
+</li>
+<li>
+<p><strong><em>INSTRUCTION</em></strong> should only contain alphanumeric characters, punctuation, spaces, and it should not be blank. E.g. <code>set1: dumbbell curls reps: 4-6</code>.</p>
+</li>
+<li>
+<p><strong><em>USERNAME</em></strong> should only contain alphanumeric characters, and it should not be blank. E.g.  <code>John Doe</code> and <code>Jane</code> are valid.</p>
+</li>
+<li>
+<p><strong><em>HEIGHT</em></strong> should only be in the form x.xx whereby x is any integer. E.g. <code>1.72</code> and <code>1.88</code> are valid.</p>
+</li>
+<li>
+<p><strong><em>WEIGHT</em></strong> should only be in the form xx.x or xxx.x whereby x is any integer. E.g. <code>88.4</code> and <code>102.9</code> are valid.</p>
+</li>
+<li>
+<p><strong><em>GENDER</em></strong> should only be either male or female.</p>
+</li>
+<li>
+<p><strong><em>MODE</em></strong> should only be either <code>all</code>, <code>single</code> or <code>multiple INTEGER</code> where INTEGER are positive integers from 1 to 1000. E.g <code>multiple 777</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Items in square brackets are optional e.g <code>name/NAME [tag/TAG]</code> can be used as <code>name/commando workout tag/strength</code> or as <code>name/commando workout</code>.</p>
+</li>
+<li>
+<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[tag/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>tag/strength</code>, <code>tag/strength tag/fast-paced</code> etc.</p>
+</li>
+<li>
+<p>Parameters can be in any order e.g. if the command specifies <code>name/NAME type/TYPE</code>, <code>type/TYPE name/NAME</code> is also acceptable.</p>
+</li>
+<li>
+<p>White spaces after a slash are automatically trimmed. For example, <code>add name/ commando workout</code> and <code>add name/commando workout</code> are the same. However, the latter is more visually pleasing.</p>
+</li>
+<li>
+<p>Duplicate parameters after one another will only take the last parameter input. For example, <code>add name/commando workout name/arnold workout</code> will only add the workout as arnold workout.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2 include">
+<h3 id="recommending-a-workout-code-recommend-code"><a class="link" href="#recommending-a-workout-code-recommend-code">Recommending a workout : <code>recommend</code></a></h3>
+<div class="paragraph">
+<p>Recommends workout from the workout book.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Recommend command only recommends workout from the current workout list.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+To recommend from the entire list of workouts, you should first type <code>list</code> in the command box and press <kbd>Enter</kbd> to
+retrieve the entire list of workouts.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>There are two ways to use the <code>recommend</code> command.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Recommend directly from the Workout Presets in your profile.</p>
+</li>
+<li>
+<p>Recommend through the inputs in the command box.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Recommend directly from the Workout Presets in your profile</strong></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>recommend</code></p>
+</div>
+<div id="fig-UserProfileCard" class="imageblock">
+<div class="content">
+<img src="../images/userprofilecard.png" alt="userprofilecard" width="450">
+</div>
+<div class="title">Figure 1. After you have provided the appropriate properties in your profile.</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br>
+Type <code>recommend</code> in the command box, press <kbd>Enter</kbd> and you have Figure 2.<br>
+&#160;<br></p>
+</div>
+<div id="fig-NoPrefixRecommend" class="imageblock">
+<div class="content">
+<img src="../images/noprefixrecommend.PNG" alt="noprefixrecommend" width="450">
+</div>
+<div class="title">Figure 2. Recommended result with exactly the same properties as the workout presets in Figure 1.</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p><strong>Recommend through the inputs in the command box</strong></p>
+</div>
+<div class="paragraph">
+<p>There are two ways to recommend through the inputs.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Recommend without optional prefixes.</p>
+</li>
+<li>
+<p>Recommend with optional prefixes.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Recommend without optional prefixes</strong></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>recommend mode/MODE [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>At least one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>You can choose to recommend single, multiple or even all workouts based on the specified <code>MODE</code>.</p>
+</li>
+<li>
+<p>Workout recommended will have properties exactly the same as the inputs you have entered in the command box.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>recommend mode/single difficulty/beginner</code><br>
+Recommends a beginner workout.</p>
+</li>
+<li>
+<p><code>recommend mode/multiple 2 duration/10m calories/150</code><br>
+Recommends two 10 minute workout that burns 150 calories.</p>
+</li>
+<li>
+<p><code>recommend mode/all duration/35m calories/200 difficulty/advanced</code><br>
+Recommends all advanced 35 minute workout that burns 200 calories.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong>Recommend with optional prefixes</strong></p>
+</div>
+<div class="paragraph">
+<p>Format: <code>recommend mode/MODE ocalories or calories/CALORIES odifficulty or difficulty/DIFFICULTY oduration or duration/DURATION</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>You can choose to recommend single, multiple or even all workouts based on the specified <code>MODE</code>.</p>
+</li>
+<li>
+<p>Workout recommended will try to match as much as possible to the inputs you have entered in the command box.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>recommend mode/single calories/150 difficulty/intermediate oduration/10m</code><br>
+Recommends a 10 minute intermediate workout if there exist this workout or else it will recommend an intermediate workout that burns 150 calories.</p>
+</li>
+<li>
+<p><code>recommend mode/multiple 3 calories/125 odifficulty/beginner oduration/10m</code><br>
+Recommends three 10 minute beginner workouts that burns 125 calories if there exist these workouts or else it will recommend the next best alternative.</p>
+</li>
+<li>
+<p><code>recommend mode/all ocalories/160 odifficulty/advanced oduration/10m</code><br>
+Recommends all the 10 minute advanced workouts that burns 160 calories if there exist these workouts or else it will recommend the next best alternative.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="recommending-a-workout"><a class="link" href="#recommending-a-workout">Recommending a workout</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current implementation</a></h4>
+<div class="paragraph">
+<p>The user input is parsed in <code>RecommendCommandParser</code> into different data types in the workout book. The data types that are relevant here are <code>Mode</code>, <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code>.
+A <code>RecommendArguments</code> instance is created to store these 4 different data types and is passed to the <code>RecommendCommand</code> in the <code>Logic</code> component.
+Given below is a class diagram containing <code>RecommendArguments</code> and the 4 different data types.</p>
+</div>
+<div id="fig-RecommendCommandCD" class="imageblock">
+<div class="content">
+<img src="../images/CDForRecommendArguments.png" alt="CDForRecommendArguments" width="500">
+</div>
+<div class="title">Figure 3. Class Diagram for <code>recommend</code> command.</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>RecommendArguments</code> instance is passed to a <code>getFinalFilteredInternalList()</code> method in the <code>Model</code> component.
+This method filters the current workout list in the <code>UI</code> by <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> if specified by the user, and returns a new list of filtered workouts.
+The original workout list in the <code>UI</code> is not modified. The activity diagram below depicts the execution flow of the <code>recommend</code> command.</p>
+</div>
+<div id="fig-RecommendCommandAD" class="imageblock">
+<div class="content">
+<img src="../images/ADForRecommendCommand.png" alt="ADForRecommendCommand" width="800">
+</div>
+<div class="title">Figure 4. Activity Diagram for <code>recommend</code> command.</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p>On command execution, a new <code>JumpToRecommendListRequestEvent</code> is created and posted to <code>EventsCenter</code>.
+Shown below is the component interactions for the <code>recommend mode/single calories/150</code> command.</p>
+</div>
+<div id="fig-RecommendEventSD" class="imageblock">
+<div class="content">
+<img src="../images/SDForRecommendEvent.png" alt="SDForRecommendEvent" width="700">
+</div>
+<div class="title">Figure 5. Component interactions for <code>recommend mode/single calories/150</code> command (part 1).</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p>The event then propagates through <code>EventsCenter</code> to the <code>WorkoutListPanel</code>.
+The <code>WorkoutListPanel</code> will call <code>handleJumpToRecommendListRequestEvent()</code> and update the <code>UI</code> to scroll to and select the workout.
+The process is shown in the Figure below.</p>
+</div>
+<div id="fig-RecommendEventHandlingSD" class="imageblock">
+<div class="content">
+<img src="../images/SDForRecommendEventHandling.png" alt="SDForRecommendEventHandling" width="500">
+</div>
+<div class="title">Figure 6. Component interactions for <code>recommend mode/single calories/150</code> command (part 2).</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p>For the other path, the filtered list returned from the <code>getFinalFilteredInternalList()</code> is passed to <code>WorkoutsPredicate</code> which compares every workout in the filtered list to the entire list of workouts.
+The predicate will only be true when the workout matches AT LEAST ONE of the workouts in the filtered list.
+The implementation of that can be seen below:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+<span class="directive">public</span> <span class="type">boolean</span> test(Workout workout) {
+    <span class="keyword">return</span> keyWorkouts.stream()
+            .anyMatch(keyWorkouts -&gt; workout.equals(keyWorkouts));
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>WorkoutsPredicate</code> instance is then passed to <code>updateFilteredWorkoutList()</code> method of <code>Model</code> to modify the entire list of workouts displayed to those that matched at least one of the workouts.
+The sequence diagram of this entire process can be seen below:</p>
+</div>
+<div id="fig-RecommendNonEventSD" class="imageblock">
+<div class="content">
+<img src="../images/SDForRecommendNonEvent.png" alt="SDForRecommendNonEvent" width="900">
+</div>
+<div class="title">Figure 7. Interactions inside the <code>Logic</code> component for the <code>recommend mode/single calories/150</code> command.</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p><code>recommend</code> command is integrated with the profile. User can find a workout with the respective data types <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> if specified under the workout presets in the profile.
+After that, user just have to type <code>recommend</code> in the command box, press enter to get the workout.
+Since the sequence is very similar to single mode recommend, the sequence diagram of this entire process can be seen in Figure 12 and 13.</p>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 14:15:23 UTC</div></div></div></body></html>
