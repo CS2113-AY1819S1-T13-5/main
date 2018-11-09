@@ -138,7 +138,7 @@ Do not disable them. If you have disabled them, go to <code>File</code> &gt; <co
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-You must include this <a href="https://github.com/sijieg/main/blob/master/ProfileWindow.html"><code>ProfileWindow.html</code></a> file in the same location as your <code>workoutbook.jar</code> file or else you will not be able to run the <code>workoutbook.jar</code>
+You must include this <a href="https://github.com/CS2113-AY1819S1-T13-5/main/blob/master/ProfileWindow.html"><code>ProfileWindow.html</code></a> file in the same location as your <code>workoutbook.jar</code> file or else you will not be able to run the <code>workoutbook.jar</code>
 </td>
 </tr>
 </table>
@@ -2472,6 +2472,18 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a user profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">check and update my personal details</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a user profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">set my workout preference</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">find/filter a workout by name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locate a workout without having to search through my entire workout list</p></td>
 </tr>
@@ -2746,7 +2758,7 @@ These instructions only provide a starting point for testers to work on; testers
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Download the jar file and copy into an empty folder</p>
+<p>Download the jar file and the <a href="https://github.com/CS2113-AY1819S1-T13-5/main/blob/master/ProfileWindow.html"><code>ProfileWindow.html</code></a> file and then copy into an empty folder</p>
 </li>
 <li>
 <p>Double-click the jar file<br>
@@ -2908,6 +2920,171 @@ Expected: A message saying workout is recommended will be shown in the status me
 </ol>
 </div>
 </div>
+<div class="sect3">
+<h4 id="profile-window"><a class="link" href="#profile-window">H.4.2. Profile Window</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Opening the profile window through the <code>profile</code> command.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Go to the Command box and type <code>profile</code>.</p>
+</li>
+<li>
+<p>Press enter.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Opening the profile window through the menu bar.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Go to the menu bar and click <code>Profile</code>.</p>
+</li>
+<li>
+<p>Click <code>Profile F3</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Opening the profile window the button <kbd>F3</kbd>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Simply press <kbd>F3</kbd>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 19:38:46 UTC</div></div></div></body></html>
+<div class="sect3">
+<h4 id="modifying-the-profile-window"><a class="link" href="#modifying-the-profile-window">H.4.3. Modifying the Profile Window</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Modify command with a valid input.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Ensure that <strong>at least</strong> one of the optional fields must be provided.</p>
+</li>
+<li>
+<p>Test case: <code>modify username/Akshay</code><br>
+Expected: The username should changed to <code>Akshay</code></p>
+</li>
+<li>
+<p>Test case: <code>modify height/1.78 gender/female</code><br>
+Expected: The height should changed to <code>1.78m</code>, BMI will be updated automatically and the gender should change to <code>female</code>.</p>
+</li>
+<li>
+<p>Test case: <code>modify calories/any difficulty/beginner</code><br>
+Expected: The calories should changed to <code>any</code> and the difficulty should change to <code>beginner</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Modify command with <strong>an</strong> invalid input.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>modify height/177</code><br>
+Expected: A message saying "Invalid Height format! Height should only be in x.xx form where x is an integer."</p>
+</li>
+<li>
+<p>Test case: <code>modify difficulty/easy</code><br>
+Expected: A message saying "Invalid Difficulty format! Difficulty should only be either beginner, intermediate, advanced or any."</p>
+</li>
+<li>
+<p>Test case: <code>modify username/John Doe weight/71.25</code><br>
+Expected: A message saying "Invalid Weight format! Weight should only be in xx.x/xxx.x form where x is an integer."</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Modify command with <strong>multiple</strong> invalid input.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Note that the displayed message will only indicate the <strong>first</strong> invalid input</p>
+</li>
+<li>
+<p>Test case: <code>modify height/166.22 difficulty/easy</code><br>
+Expected: A message saying "Invalid Height format! Height should only be in x.xx form where x is an integer."</p>
+</li>
+<li>
+<p>Note that the displayed message will only indicate the <strong>first</strong> invalid input</p>
+</li>
+<li>
+<p>Test case: <code>modify gender/males difficulty/easy</code><br>
+Expected: A message saying "Invalid Gender format! Gender should either be male or female."</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Modify command with an empty input.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>modify height/</code><br>
+Expected: A message saying "Invalid Height format! Height should only be in x.xx form where x is an integer."</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-09 20:43:52 UTC</div></div></div></body></html>
