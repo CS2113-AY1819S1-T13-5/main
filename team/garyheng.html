@@ -10,7 +10,10 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>TO BE CHANGED</p>
+<p>Are you a professional athlete who is too lazy to manually search through your workout list to find your favourite workout?
+Are you an amateur who just started working out and doesn&#8217;t know where to begin?
+Or are you just someone who prefers to have all of your workouts in one place and organized in a tidy manner. Then WorkoutBook is the solution for you!
+WorkoutBook is a desktop address book application used for anyone who does workouts to manage their workouts. The user interacts with it using a CLI, and it has a GUI created with JavaFX.</p>
 </div>
 </div>
 </div>
@@ -140,6 +143,12 @@ Format: <code>track SUBCOMMAND PREFIX/VALUE</code></p>
 <li>
 <p><code>PREFIX/VALUE</code> follows the acceptable formats for the workout parameters as stated above.</p>
 </li>
+<li>
+<p><code>VALUE</code> has to be one string/value with no spaces.</p>
+</li>
+<li>
+<p>To view the completed workouts that have been recorded, refer to <a href="#selecting-a-workout-code-select-code">the <code>select</code> command</a></p>
+</li>
 </ul>
 </div>
 </div>
@@ -156,183 +165,13 @@ Any completed workout after this command is entered, that has the parameter <cod
 </li>
 <li>
 <p><code>track stop calories/100</code><br>
-Stops tracking the parameter <code>calories/100</code>, if it is currently being tracked.</p>
+Stops tracking the parameter <code>calories/100</code>, if it is currently being tracked.
+=== Selecting a tracked parameter : <code>select</code></p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="filtering-workouts-by-type-duration-and-equipment-code-filter-code"><a class="link" href="#filtering-workouts-by-type-duration-and-equipment-code-filter-code">Filtering workouts by type, duration, and equipment: <code>filter</code></a></h3>
 <div class="paragraph">
-<p>Filters workouts whose types, durations, equipments contain any of the given keywords.<br>
-Format: <code>filter type/TYPE duration/DURATION equipment/EQUIPMENT</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The search is case insensitive. e.g <code>filter type/strength</code> will match <code>filter type/STRENGTH</code></p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>filter type/strength duration/20m</code> will match <code>filter duration/20m type/strength</code></p>
-</li>
-<li>
-<p>Three parameters: Duration, equipment, type are searched.</p>
-</li>
-<li>
-<p>If the keywords are more than one word, only the first word will be filtered.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>filter duration/20m equipment/dumbbell type/strength</code><br>
-Returns any workout having duration of <code>20m</code>, with equipment of <code>dumbbell</code> and of type <code>strength</code>.</p>
-</li>
-<li>
-<p><code>filter duration/20m type/strength equipment/dumbbell</code> is the same as <code>filter duration/20m
-equipment/dumbbell type/strength</code>.</p>
-</li>
-<li>
-<p><code>filter duration/20m type/strength equipment/free weights</code> is the same as <code>filter duration/20m
-type/strength equipment/free</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="locating-workouts-by-name-code-find-code"><a class="link" href="#locating-workouts-by-name-code-find-code">Locating workouts by name: <code>find</code></a></h3>
-<div class="paragraph">
-<p>Finds workouts whose names contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The search is case insensitive. e.g <code>Commando workout</code> will match <code>commando workout</code></p>
-</li>
-<li>
-<p>The order of the keywords does not matter. e.g. <code>workout commando</code> will match <code>commando workout</code></p>
-</li>
-<li>
-<p>Only the name is searched.</p>
-</li>
-<li>
-<p>Only full words will be matched e.g. <code>command workout</code> will not match <code>commando workout</code></p>
-</li>
-<li>
-<p>workouts matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>commando arnold&#8217;s</code> will return <code>commando workout</code>, <code>Arnold&#8217;s workout</code></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>find commando</code><br>
-Returns <code>command workout</code>.</p>
-</li>
-<li>
-<p><code>find commando arnold&#8217;s</code><br>
-Returns any workout having names <code>commando</code> or <code>arnold&#8217;s</code>.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-a-workout-code-delete-code"><a class="link" href="#deleting-a-workout-code-delete-code">Deleting a workout : <code>delete</code></a></h3>
-<div class="paragraph">
-<p>Deletes the specified workout from the workout book.<br>
-Format: <code>delete INDEX</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the workout at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the displayed workout list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code><br>
-<code>delete 2</code><br>
-Deletes the 2nd workout in the workout book.</p>
-</li>
-<li>
-<p><code>find commando</code><br>
-<code>delete 1</code><br>
-Deletes the 1st workout in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="remarking-a-workout-code-remark-code"><a class="link" href="#remarking-a-workout-code-remark-code">Remarking a workout : <code>remark</code></a></h3>
-<div class="paragraph">
-<p>Remarks the specified workout from the workout book.<br>
-Format: <code>remark INDEX [r/REMARK]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Remarks the workout at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed workout list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
-<p>You can remove all the workout&#8217;s remarks by typing <code>r/</code> without specifying any remarks after it.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>remark 1 r/This workout trains bicep</code><br>
-Remarks the 1st workout as <code>This workout trains bicep</code>.</p>
-</li>
-<li>
-<p><code>remark 2 r/</code><br>
-Clears the remark of the 2nd workout.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="selecting-a-workout-code-select-code"><a class="link" href="#selecting-a-workout-code-select-code">Selecting a workout : <code>select</code></a></h3>
-<div class="paragraph">
-<p>Selects the workout identified by the index number used in the displayed workout list.<br>
+<p>Selects the parameter identified by the index number used in the displayed tracked parameters list.<br>
 Format: <code>select INDEX</code></p>
 </div>
 <div class="sidebarblock">
@@ -340,51 +179,16 @@ Format: <code>select INDEX</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Selects the workout and loads the Google search page the workout at the specified <code>INDEX</code>.</p>
+<p>Selects the parameter and displays the tracked completed workouts which contain the selected parameter.</p>
 </li>
 <li>
-<p>The index refers to the index number shown in the displayed workout list.</p>
+<p><code>INDEX</code> refers to the index number shown in the displayed tracked parameters list.</p>
 </li>
 <li>
 <p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
 </li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p><code>list</code><br>
-<code>select 2</code><br>
-Selects the 2nd workout in the workout book.</p>
-</li>
-<li>
-<p><code>find commando</code><br>
-<code>select 1</code><br>
-Selects the 1st workout in the results of the <code>find</code> command.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="sorting-a-workout-code-sort-code"><a class="link" href="#sorting-a-workout-code-sort-code">Sorting a workout : <code>sort</code></a></h3>
-<div class="paragraph">
-<p>Sorts the workouts.<br>
-Format: <code>sort</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Sorts the workout.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the displayed workout list.</p>
+<p>The index cannot be larger than the last index number shown in the displayed tracked parameters list.</p>
 </li>
 </ul>
 </div>
@@ -396,496 +200,13 @@ Format: <code>sort</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>add name/joe&#8217;s workout type/strength duration/20m difficulty/beginner equipment/dumbbell muscle/bicep calories/200 instruction/bicep curl reps: 4-6 tag/future​</code><br>
-<code>sort</code><br>
-Sorts a list of all workouts in the workout book based on names after <code>add</code> a new workout.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>sort</code><br>
-Sorts workout after <code>delete</code> a workout.</p>
+<p><code>select 2</code><br>
+Selects the 2nd parameter in the tracked parameters list.
+Previously completed workouts that were tracked, which contain the selected parameter, will be displayed.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">Listing entered commands : <code>history</code></a></h3>
-<div class="paragraph">
-<p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code>history</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous and next input respectively in the command box.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="viewing-user-profile-code-profile-code"><a class="link" href="#viewing-user-profile-code-profile-code">Viewing user profile : <code>profile</code></a></h3>
-<div class="paragraph">
-<p>Shows the user profile. The user profile consists of username, gender, height, weight, BMI. It also contains the workout preset for users such as calories, difficulty and duration which the user can set base on their preference.<br>
-Format: <code>profile</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Pressing the <kbd>F3</kbd> key will display the user profile as well!</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="modifying-user-profile-code-modify-code"><a class="link" href="#modifying-user-profile-code-modify-code">Modifying user profile : <code>modify</code></a></h3>
-<div class="paragraph">
-<p>Modify the user&#8217;s profile.<br>
-Format: <code>modify [gender/GENDER] [username/USERNAME] [height/HEIGHT] [weight/WEIGHT] [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Accepts any combinations of the all the prefixes.</p>
-</li>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The workout presets for calories, difficulty and duration accepts <code>any</code> as a input as well*. It would simply mean that the user wants any amount of calories, duration or any difficulty.</p>
-</div>
-<div class="paragraph">
-<p>*Be warned that it only accepts "any" under the profile, <em>NOT</em> the add or edit command.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>modify username/apple</code><br>
-Change your user profile&#8217;s username to apple.</p>
-</li>
-<li>
-<p><code>modify username/apple height/1.82</code><br>
-Change your user profile&#8217;s username to apple, height to 1.82m and update the BMI accordingly.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="recommending-a-workout-code-recommend-code"><a class="link" href="#recommending-a-workout-code-recommend-code">Recommending a workout : <code>recommend</code></a></h3>
-<div class="paragraph">
-<p>Recommends workout from the workout book.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Recommend command only recommends workout from the current workout list.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-To recommend from the entire list of workouts, you should first type <code>list</code> in the command box and press <kbd>Enter</kbd> to
-retrieve the entire list of workouts.
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>When one workout is requested (either through the user&#8217;s WorkoutPresets or the user input with a specified <code>Mode</code> of single) and there is more than one matching workout, a random matching workout is retrieved.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>There are two ways to use the <code>recommend</code> command.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Recommend directly from the Workout Presets in your profile.</p>
-</li>
-<li>
-<p>Recommend through the inputs in the command box.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Recommend directly from the Workout Presets in your profile</strong></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>recommend</code></p>
-</div>
-<div id="fig-UserProfileCard" class="imageblock">
-<div class="content">
-<img src="../images/userprofilecard.png" alt="userprofilecard" width="200">
-</div>
-<div class="title">Figure 1. After you have provided the appropriate properties in your profile.</div>
-</div>
-<div class="paragraph">
-<p>&#160;<br>
-Type <code>recommend</code> in the command box, press <kbd>Enter</kbd> and you have Figure 2.<br>
-&#160;<br></p>
-</div>
-<div id="fig-NoPrefixRecommend" class="imageblock">
-<div class="content">
-<img src="../images/noprefixrecommend.PNG" alt="noprefixrecommend" width="450">
-</div>
-<div class="title">Figure 2. Recommended result with exactly the same properties as the workout presets in Figure 1.</div>
-</div>
-<div class="paragraph">
-<p>&#160;<br></p>
-</div>
-<div class="paragraph">
-<p><strong>Recommend through the inputs in the command box</strong></p>
-</div>
-<div class="paragraph">
-<p>There are two ways to recommend through the inputs.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Recommend without optional prefixes.</p>
-</li>
-<li>
-<p>Recommend with optional prefixes.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Recommend without optional prefixes</strong></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>recommend mode/MODE [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>You can choose to recommend single, multiple or even all workouts based on the specified <code>MODE</code>.</p>
-</li>
-<li>
-<p>Workout recommended will have properties exactly the same as the inputs you have entered in the command box.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>recommend mode/single difficulty/beginner</code><br>
-Recommends a beginner workout.</p>
-</li>
-<li>
-<p><code>recommend mode/multiple 2 duration/10m calories/150</code><br>
-Recommends two 10 minute workout that burns 150 calories.</p>
-</li>
-<li>
-<p><code>recommend mode/all duration/35m calories/200 difficulty/advanced</code><br>
-Recommends all advanced 35 minute workout that burns 200 calories.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Recommend with optional prefixes</strong></p>
-</div>
-<div class="paragraph">
-<p>Format: <code>recommend mode/MODE ocalories or calories/CALORIES odifficulty or difficulty/DIFFICULTY oduration or duration/DURATION</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>You can choose to recommend single, multiple or even all workouts based on the specified <code>MODE</code>.</p>
-</li>
-<li>
-<p>Workout recommended will try to match as much as possible to the inputs you have entered in the command box.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>recommend mode/single calories/150 difficulty/intermediate oduration/10m</code><br>
-Recommends a 10 minute intermediate workout if there exist this workout or else it will recommend an intermediate workout that burns 150 calories.</p>
-</li>
-<li>
-<p><code>recommend mode/multiple 3 calories/125 odifficulty/beginner oduration/10m</code><br>
-Recommends three 10 minute beginner workouts that burns 125 calories if there exist these workouts or else it will recommend the next best alternative.</p>
-</li>
-<li>
-<p><code>recommend mode/all ocalories/160 odifficulty/advanced oduration/10m</code><br>
-Recommends all the 10 minute advanced workouts that burns 160 calories if there exist these workouts or else it will recommend the next best alternative.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">Undoing previous command : <code>undo</code></a></h3>
-<div class="paragraph">
-<p>Restores the workout book to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Undoable commands: those commands that modify the workout book&#8217;s content (<code>add</code>, <code>current</code>, <code>complete</code>, <code>delete</code>, <code>edit</code>, <code>remark</code>, <code>sort</code>, <code>track</code> and <code>clear</code>).</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>select 1</code><br>
-<code>list</code><br>
-<code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">Redoing the previously undone command : <code>redo</code></a></h3>
-<div class="paragraph">
-<p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
-</li>
-<li>
-<p><code>delete 1</code><br>
-<code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">Clearing all entries : <code>clear</code></a></h3>
-<div class="paragraph">
-<p>Clears all entries from the workout book.<br>
-Format: <code>clear</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">Exiting the program : <code>exit</code></a></h3>
-<div class="paragraph">
-<p>Exits the program.<br>
-Format: <code>exit</code></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">Saving the data</a></h3>
-<div class="paragraph">
-<p>Workout book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">Command Summary</a></h2>
-<div class="sectionbody">
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Command</th>
-<th class="tableblock halign-left valign-top">Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Add</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add name/NAME type/TYPE duration/DURATION difficulty/DIFFICULTY equipment/EQUIPMENT muscle/MUSCLE calories/CALORIES instruction/INSTRUCTION [tag/TAG]&#8230;&#8203;</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clear</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Complete</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>complete 1</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Current</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>current 1</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Delete</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete 1</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Edit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit 1 name/NAME &#8230;&#8203;</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Exit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Filter</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>filter duration/20m equipment/dumbbell type/strength</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">History</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Modify</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>modify gender/female username/sarah height/1.69 weight/87.2 calories/150 difficulty/beginner duration/15m</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Recommend</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>recommend mode/single difficulty/beginner</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Redo</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Remark</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remark 1 r/REMARK</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Select</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select 1</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Track</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>track SUBCOMMAND PREFIX/VALUE</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Undo</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="sect1">
@@ -902,35 +223,338 @@ There is no need to save manually.</p>
 </tbody>
 </table>
 <div class="sect2">
+<h3 id="architecture"><a class="link" href="#architecture">Architecture</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/Architecture.png" alt="Architecture" width="600">
+</div>
+<div class="title">Figure 1. Architecture Diagram</div>
+</div>
+<div class="paragraph">
+<p>The <strong><em>Architecture Diagram</em></strong> given above explains the high-level design of the App. Given below is a quick overview of each component.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+The <code>.pptx</code> files used to create diagrams in this document can be found in the <a href="{repoURL}/docs/diagrams/">diagrams</a> folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose <code>Save as picture</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><code>Main</code> has only one class called <a href="{repoURL}/src/main/java/seedu/address/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>At app launch: Initializes the components in the correct sequence, and connects them up with each other.</p>
+</li>
+<li>
+<p>At shut down: Shuts down the components and invokes cleanup method where necessary.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#Design-Commons"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>EventsCenter</code> : This class (written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google&#8217;s Event Bus library</a>) is used by components to communicate with other components using events (i.e. a form of <em>Event Driven</em> design)</p>
+</li>
+<li>
+<p><code>LogsCenter</code> : Used by many classes to write log messages to the App&#8217;s log file.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The rest of the App consists of four components.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#Design-Ui"><strong><code>UI</code></strong></a>: The UI of the App.</p>
+</li>
+<li>
+<p><a href="#Design-Logic"><strong><code>Logic</code></strong></a>: The command executor.</p>
+</li>
+<li>
+<p><a href="#Design-Model"><strong><code>Model</code></strong></a>: Holds the data of the App in-memory.</p>
+</li>
+<li>
+<p><a href="#Design-Storage"><strong><code>Storage</code></strong></a>: Reads data from, and writes data to, the hard disk.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Each of the four components</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Defines its <em>API</em> in an <code>interface</code> with the same name as the Component.</p>
+</li>
+<li>
+<p>Exposes its functionality using a <code>{Component Name}Manager</code> class.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For example, the <code>Logic</code> component (see the class diagram given below) defines it&#8217;s API in the <code>Logic.java</code> interface and exposes its functionality using the <code>LogicManager.java</code> class.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
+</div>
+<div class="title">Figure 2. Class Diagram of the Logic Component</div>
+</div>
+<h4 id="events-driven-nature-of-the-design" class="discrete">Events-Driven nature of the design</h4>
+<div class="paragraph">
+<p>The <em>Sequence Diagram</em> below shows how the components interact for the scenario where the user issues the command <code>delete 1</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SDforDeletePerson.png" alt="SDforDeletePerson" width="800">
+</div>
+<div class="title">Figure 3. Component interactions for <code>delete 1</code> command (part 1)</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note how the <code>Model</code> simply raises a <code>WorkoutBookChangedEvent</code> when the Workout Book data is changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The diagram below shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SDforDeletePersonEventHandling.png" alt="SDforDeletePersonEventHandling" width="800">
+</div>
+<div class="title">Figure 4. Component interactions for <code>delete 1</code> command (part 2)</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note how the event is propagated through the <code>EventsCenter</code> to the <code>Storage</code> and <code>UI</code> without <code>Model</code> having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The sections below give more details of each component.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Ui"><a class="link" href="#Design-Ui">UI component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiClassDiagram.png" alt="UiClassDiagram" width="800">
+</div>
+<div class="title">Figure 5. Structure of the UI Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>WorkoutListPanel</code>, TrackedDataListPanel`, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+</div>
+<div class="paragraph">
+<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="{repoURL}/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="{repoURL}/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>UI</code> component,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Executes user commands using the <code>Logic</code> component.</p>
+</li>
+<li>
+<p>Binds itself to some data in the <code>Model</code> so that the UI can auto-update when data in the <code>Model</code> change.</p>
+</li>
+<li>
+<p>Responds to events raised from various parts of the App and updates the UI accordingly.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Logic"><a class="link" href="#Design-Logic">Logic component</a></h3>
+<div id="fig-LogicClassDiagram" class="imageblock">
+<div class="content">
+<img src="../images/LogicClassDiagram.png" alt="LogicClassDiagram" width="800">
+</div>
+<div class="title">Figure 6. Structure of the Logic Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> :
+<a href="{repoURL}/src/main/java/seedu/address/logic/Logic.java"><code>Logic.java</code></a></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>Logic</code> uses the <code>WorkoutBookParser</code> class to parse the user command.</p>
+</li>
+<li>
+<p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
+</li>
+<li>
+<p>The command execution can affect the <code>Model</code> (e.g. adding a person) and/or raise events.</p>
+</li>
+<li>
+<p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Given below is the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute("delete 1")</code> API call.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/DeletePersonSdForLogic.png" alt="DeletePersonSdForLogic" width="800">
+</div>
+<div class="title">Figure 7. Interactions Inside the Logic Component for the <code>delete 1</code> Command</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Model"><a class="link" href="#Design-Model">Model component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModelClassDiagram.png" alt="ModelClassDiagram" width="600">
+</div>
+<div class="title">Figure 8. Structure of the Model Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/address/model/Model.java"><code>Model.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Model</code>,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
+</li>
+<li>
+<p>stores the Workout Book, Tracked Data, and Tracked Data List data.</p>
+</li>
+<li>
+<p>exposes an unmodifiable <code>ObservableList&lt;Workout&gt;</code> and an unmodifiable <code>ObservableList&lt;Parameter&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+</li>
+<li>
+<p>does not depend on any of the other three components.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+As a more OOP model, we can store a <code>Tag</code> list in <code>WorkoutBook</code> and <code>TrackedData</code>, which <code>Workout</code> can reference. This would allow <code>WorkoutBook</code> and <code>TrackedData</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Workout</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+<br>
+<span class="image"><img src="../images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="Design-Storage"><a class="link" href="#Design-Storage">Storage component</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StorageClassDiagram.png" alt="StorageClassDiagram" width="800">
+</div>
+<div class="title">Figure 9. Structure of the Storage Component</div>
+</div>
+<div class="paragraph">
+<p><strong>API</strong> : <a href="{repoURL}/src/main/java/seedu/address/storage/Storage.java"><code>Storage.java</code></a></p>
+</div>
+<div class="paragraph">
+<p>The <code>Storage</code> component,</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>can save <code>UserPref</code> objects in json format and read it back.</p>
+</li>
+<li>
+<p>can save the Workout Book data in xml format and read it back.</p>
+</li>
+<li>
+<p>can save the Tracked Data List data in xml format and read it back.</p>
+</li>
+<li>
+<p>can save the Tracked Data data in xml format and read it back.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
 <h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
+<p>The undo/redo mechanism is facilitated by <code>VersionedWorkoutBook</code>, <code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code>.
+<code>VersionedWorkoutBook</code> extends <code>WorkoutBook</code> with an undo/redo history, stored internally as an <code>workoutBookStateList</code> and <code>currentStatePointer</code>.
 Additionally, it implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p><code>VersionedWorkoutBook#commit()</code>&#8201;&#8212;&#8201;Saves the current workout book state in its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p><code>VersionedWorkoutBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous workout book state from its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p><code>VersionedWorkoutBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone workout book state from its history.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
+<p><code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code> are implemented in a similar fashion, with their own <code>&#8230;&#8203;StateList</code>, <code>currentStatePointer</code>, and <code>commit&#8230;&#8203;()</code>, <code>undo&#8230;&#8203;()</code> and <code>redo&#8230;&#8203;()</code> methods.</p>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitModel()</code>, <code>Model#undoModel()</code> and <code>Model#redoModel()</code> respectively.
+These methods serve as wrappers, ensuring that all 3 <code>Versioned</code> classes carry out the same operations together.
+The implementation of <code>Model#commitModel()</code> is shown below as an example.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+<span class="directive">public</span> <span class="type">void</span> commitModel() {
+    commitWorkoutBook();
+    commitTrackedDataList();
+    commitTrackedData();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, <code>Model#commitWorkoutBook()</code> calls <code>VersionedWorkoutBook#commit()</code>, and <code>Model#commitTrackedDataList()</code> and <code>Model#commitTrackedData()</code> function similarly.</p>
 </div>
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>Step 1. The user launches the application for the first time. The <code>VersionedWorkoutBook</code>, <code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code> will be initialized with their initial states, and their respective <code>currentStatePointer</code> point to their respective initial state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -938,7 +562,8 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
+<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitModel()</code>, causing the modified state of the workout book after the <code>delete 5</code> command executes to be saved in the <code>workoutBookStateList</code>.
+To ensure that the entire model&#8217;s state is preserved, <code>Model#commitModel()</code> ensures that the states of <code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code> are also saved in their respective <code>&#8230;&#8203;StateList</code> attributes, and the <code>currentStatePointer</code> of the 3 <code>Versioned</code> classes are moved to the newly inserted state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -946,7 +571,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
+<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitModel()</code>, causing another modified state to be saved into every <code>&#8230;&#8203;StateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -960,13 +585,13 @@ Additionally, it implements the following operations:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
+If a command fails its execution, it will not call <code>Model#commitModel()</code>, so no new state will be saved into every <code>&#8230;&#8203;StateList</code>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
+<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoModel()</code>, which will shift the <code>currentStatePointer</code> of all 3 <code>Versioned</code> classes once to the left, pointing it to the previous state, and restores the entire model to that state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -980,7 +605,9 @@ If a command fails its execution, it will not call <code>Model#commitAddressBook
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the <code>currentStatePointer</code> is at index 0, pointing to the initial state, then there are no previous states to restore. The <code>undo</code> command uses <code>Model#canUndo()</code> to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the undo.
+<code>Model#canUndo()</code> functions by checking whether the <code>currentStatePointer</code> of all 3 <code>Versioned</code> classes.
 </td>
 </tr>
 </table>
@@ -994,7 +621,7 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
+<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoModel()</code>, which shifts every <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the entire model to that state.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1003,13 +630,13 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the <code>currentStatePointer</code> is at index <code>&#8230;&#8203;StateList.size() - 1</code>, pointing to the latest state, then there are no undone states to restore. The <code>redo</code> command uses <code>Model#canRedo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
+<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitModel()</code>, <code>Model#undoModel()</code> or <code>Model#redoModel()</code>. Thus, every <code>&#8230;&#8203;StateList</code> remains unchanged.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1017,7 +644,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitModel()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>&#8230;&#8203;StateList</code>, all states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1040,7 +667,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire Model.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1073,14 +700,14 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of model states, in each <code>Versioned</code> class.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
 </li>
 <li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
+<p>Cons: Logic is duplicated 4 times. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and all 3 <code>Versioned</code> classes.</p>
 </li>
 </ul>
 </div>
@@ -1093,7 +720,101 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
 </li>
 <li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
+<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.
+==== Current Implementation
+The user input is parsed into <code><em>TrackCommandParser</em></code> to generate a <code>Parameter</code> object, which is then passed on to <code><em>TrackCommand</em></code>.
+Upon execution of the command, the <code>Parameter</code> is then stored in/removed from the <code>TrackedDataList</code>.
+This <code>TrackedDataList</code> stores all the <code>Parameter</code> objects currently being tracked.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div id="fig-ParameterClassDiagram" class="imageblock">
+<div class="content">
+<img src="../images/ParameterClassDiagram.png" alt="ParameterClassDiagram" width="400">
+</div>
+<div class="title">Figure 10. Class Diagram for the <code>Parameter</code> class</div>
+</div>
+<div id="fig-TrackedDataListClassDiagram" class="imageblock">
+<div class="content">
+<img src="../images/TrackedDataListClassDiagram.png" alt="TrackedDataListClassDiagram" width="400">
+</div>
+<div class="title">Figure 11. Class Diagram for the <code>TrackedDataList</code> class</div>
+</div>
+<div class="paragraph">
+<p>When a workout is marked as completed using the memory feature, if any tracked <code>Parameter</code> is present in the workout, if will be stored in <code>TrackedData</code>.</p>
+</div>
+<div id="fig-TrackedDataClassDiagram" class="imageblock">
+<div class="content">
+<img src="../images/TrackedDataClassDiagram.png" alt="TrackedDataClassDiagram" width="400">
+</div>
+<div class="title">Figure 12. Class Diagram for the <code>TrackedData</code> class</div>
+</div>
+<div class="paragraph">
+<p><code>TrackedData</code> is analogous to <code>WorkoutBook</code>, but it does not enforce uniqueness between workouts, so as to allow for every completed workout that contains tracked parameters to be stored, regardless of uniqueness. This is done by utilising a <code>WorkoutList</code> object, analogous to the <code>UniqueWorkoutList</code> object used by <code>WorkoutBook</code>, with similar methods that allow for duplicates.</p>
+</div>
+<div class="paragraph">
+<p>Shown below is an example scenario for the tracking feature.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 1:</strong> The user executes <code>track start muscle/bicep</code>. The user input is parsed to create a <code>Parameter</code> object containing the prefix <code>muscle/</code> and the value <code>bicep</code>. The <code>Parameter</code> is stored into <code>TrackedDataList</code>. The UI then reflects the new <code>Parameter</code> being tracked.</p>
+</div>
+<div id="fig-TrackCommandSequenceDiagram1" class="imageblock">
+<div class="content">
+<img src="../images/TrackCommandSequenceDiagram1.png" alt="TrackCommandSequenceDiagram1" width="800">
+</div>
+<div class="title">Figure 13. Interactions inside <code>Model</code> component when the user enters <code>track start muscle/bicep</code></div>
+</div>
+<div class="paragraph">
+<p><strong>Step 2:</strong> The user executes <code>complete INDEX</code> on a desired workout. The <code>complete</code> command calls <code>Model#checkDataForTrack()</code>, which iterates through <code>TrackedDataList</code> to check whether any <code>Parameter</code> is present in the completed workout.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 3:</strong> If any <code>Parameter</code> is present, the workout is stored both <code>TrackedData</code> and <code>WorkoutBook</code>. If none are present, the workout is just stored in <code>WorkoutBook</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4:</strong> To view the stored workouts, the <code>select</code> command is used to select a <code>Parameter</code> for viewing. The stored workouts that contain the selected <code>Parameter</code> will be displayed to the user.</p>
+</div>
+<div class="paragraph">
+<p>In a macroscopic view, the following activity diagram shows how the tracking feature is utilised:</p>
+</div>
+<div id="fig-TrackCommandActivityDiagram" class="imageblock">
+<div class="content">
+<img src="../images/TrackFeatureActivityDiagram.png" alt="TrackFeatureActivityDiagram" width="800">
+</div>
+<div class="title">Figure 14. Activity diagram for the tracking feature</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-1-how-the-workouts-that-match-tracked-parameters-are-stored"><a class="link" href="#aspect-1-how-the-workouts-that-match-tracked-parameters-are-stored">Aspect 1: How the workouts that match tracked parameters are stored</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> All tracked workouts are stored in one file, <code><em>trackeddata.xml</em></code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement storage of the desired workouts.</p>
+</li>
+<li>
+<p>Cons: Filtering has to be done when finding workouts in the file that have a particular parameter present.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Tracked workouts are stored in separate files, with one file for each parameter being tracked.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Viewing of tracked workouts is easy, with each file containing the workouts specific to the tracked parameter.</p>
+</li>
+<li>
+<p>Cons: Difficult to specify the <code>Path</code> for each individual file, especially when the parameters in the <code>TrackedDataList</code> can vary widely during app usage.</p>
 </li>
 </ul>
 </div>
@@ -1104,4 +825,4 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 04:33:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 04:52:40 UTC</div></div></div></body></html>

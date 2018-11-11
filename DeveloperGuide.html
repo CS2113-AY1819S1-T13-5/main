@@ -420,7 +420,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note how the <code>Model</code> simply raises a <code>AddressBookChangedEvent</code> when the Address Book data are changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
+Note how the <code>Model</code> simply raises a <code>WorkoutBookChangedEvent</code> when the Workout Book data is changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
 </td>
 </tr>
 </table>
@@ -462,7 +462,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/CS2113-AY1819S1-T13-5/main/tree/master/src/main/java/seedu/address/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>WorkoutListPanel</code>, TrackedDataListPanel`, <code>StatusBarFooter</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2113-AY1819S1-T13-5/main/tree/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2113-AY1819S1-T13-5/main/tree/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -499,7 +499,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>Logic</code> uses the <code>AddressBookParser</code> class to parse the user command.</p>
+<p><code>Logic</code> uses the <code>WorkoutBookParser</code> class to parse the user command.</p>
 </li>
 <li>
 <p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
@@ -542,10 +542,10 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores the Workout Book, Tracked Data, and Tracked Data List data.</p>
 </li>
 <li>
-<p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
+<p>exposes an unmodifiable <code>ObservableList&lt;Workout&gt;</code> and an unmodifiable <code>ObservableList&lt;Parameter&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
 </li>
 <li>
 <p>does not depend on any of the other three components.</p>
@@ -559,7 +559,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Person</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+As a more OOP model, we can store a <code>Tag</code> list in <code>WorkoutBook</code> and <code>TrackedData</code>, which <code>Workout</code> can reference. This would allow <code>WorkoutBook</code> and <code>TrackedData</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Workout</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
 <br>
 <span class="image"><img src="images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
 </td>
@@ -587,7 +587,13 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <p>can save <code>UserPref</code> objects in json format and read it back.</p>
 </li>
 <li>
-<p>can save the Address Book data in xml format and read it back.</p>
+<p>can save the Workout Book data in xml format and read it back.</p>
+</li>
+<li>
+<p>can save the Tracked Data List data in xml format and read it back.</p>
+</li>
+<li>
+<p>can save the Tracked Data data in xml format and read it back.</p>
 </li>
 </ul>
 </div>
@@ -611,31 +617,49 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book<
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">3.1.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedAddressBook</code>.
-It extends <code>AddressBook</code> with an undo/redo history, stored internally as an <code>addressBookStateList</code> and <code>currentStatePointer</code>.
+<p>The undo/redo mechanism is facilitated by <code>VersionedWorkoutBook</code>, <code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code>.
+<code>VersionedWorkoutBook</code> extends <code>WorkoutBook</code> with an undo/redo history, stored internally as an <code>workoutBookStateList</code> and <code>currentStatePointer</code>.
 Additionally, it implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VersionedAddressBook#commit()</code>&#8201;&#8212;&#8201;Saves the current address book state in its history.</p>
+<p><code>VersionedWorkoutBook#commit()</code>&#8201;&#8212;&#8201;Saves the current workout book state in its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous address book state from its history.</p>
+<p><code>VersionedWorkoutBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous workout book state from its history.</p>
 </li>
 <li>
-<p><code>VersionedAddressBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone address book state from its history.</p>
+<p><code>VersionedWorkoutBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone workout book state from its history.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> and <code>Model#redoAddressBook()</code> respectively.</p>
+<p><code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code> are implemented in a similar fashion, with their own <code>&#8230;&#8203;StateList</code>, <code>currentStatePointer</code>, and <code>commit&#8230;&#8203;()</code>, <code>undo&#8230;&#8203;()</code> and <code>redo&#8230;&#8203;()</code> methods.</p>
+</div>
+<div class="paragraph">
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitModel()</code>, <code>Model#undoModel()</code> and <code>Model#redoModel()</code> respectively.
+These methods serve as wrappers, ensuring that all 3 <code>Versioned</code> classes carry out the same operations together.
+The implementation of <code>Model#commitModel()</code> is shown below as an example.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
+<span class="directive">public</span> <span class="type">void</span> commitModel() {
+    commitWorkoutBook();
+    commitTrackedDataList();
+    commitTrackedData();
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here, <code>Model#commitWorkoutBook()</code> calls <code>VersionedWorkoutBook#commit()</code>, and <code>Model#commitTrackedDataList()</code> and <code>Model#commitTrackedData()</code> function similarly.</p>
 </div>
 <div class="paragraph">
 <p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedAddressBook</code> will be initialized with the initial address book state, and the <code>currentStatePointer</code> pointing to that single address book state.</p>
+<p>Step 1. The user launches the application for the first time. The <code>VersionedWorkoutBook</code>, <code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code> will be initialized with their initial states, and their respective <code>currentStatePointer</code> point to their respective initial state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -643,7 +667,8 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitAddressBook()</code>, causing the modified state of the address book after the <code>delete 5</code> command executes to be saved in the <code>addressBookStateList</code>, and the <code>currentStatePointer</code> is shifted to the newly inserted address book state.</p>
+<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitModel()</code>, causing the modified state of the workout book after the <code>delete 5</code> command executes to be saved in the <code>workoutBookStateList</code>.
+To ensure that the entire model&#8217;s state is preserved, <code>Model#commitModel()</code> ensures that the states of <code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code> are also saved in their respective <code>&#8230;&#8203;StateList</code> attributes, and the <code>currentStatePointer</code> of the 3 <code>Versioned</code> classes are moved to the newly inserted state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -651,7 +676,7 @@ Additionally, it implements the following operations:</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitAddressBook()</code>, causing another modified address book state to be saved into the <code>addressBookStateList</code>.</p>
+<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitModel()</code>, causing another modified state to be saved into every <code>&#8230;&#8203;StateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -665,13 +690,13 @@ Additionally, it implements the following operations:</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If a command fails its execution, it will not call <code>Model#commitAddressBook()</code>, so the address book state will not be saved into the <code>addressBookStateList</code>.
+If a command fails its execution, it will not call <code>Model#commitModel()</code>, so no new state will be saved into every <code>&#8230;&#8203;StateList</code>.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoAddressBook()</code>, which will shift the <code>currentStatePointer</code> once to the left, pointing it to the previous address book state, and restores the address book to that state.</p>
+<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoModel()</code>, which will shift the <code>currentStatePointer</code> of all 3 <code>Versioned</code> classes once to the left, pointing it to the previous state, and restores the entire model to that state.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -685,7 +710,9 @@ If a command fails its execution, it will not call <code>Model#commitAddressBook
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The <code>undo</code> command uses <code>Model#canUndoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the <code>currentStatePointer</code> is at index 0, pointing to the initial state, then there are no previous states to restore. The <code>undo</code> command uses <code>Model#canUndo()</code> to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the undo.
+<code>Model#canUndo()</code> functions by checking whether the <code>currentStatePointer</code> of all 3 <code>Versioned</code> classes.
 </td>
 </tr>
 </table>
@@ -699,7 +726,7 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoAddressBook()</code>, which shifts the <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the address book to that state.</p>
+<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoModel()</code>, which shifts every <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the entire model to that state.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -708,13 +735,13 @@ If the <code>currentStatePointer</code> is at index 0, pointing to the initial a
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If the <code>currentStatePointer</code> is at index <code>addressBookStateList.size() - 1</code>, pointing to the latest address book state, then there are no undone address book states to restore. The <code>redo</code> command uses <code>Model#canRedoAddressBook()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the <code>currentStatePointer</code> is at index <code>&#8230;&#8203;StateList.size() - 1</code>, pointing to the latest state, then there are no undone states to restore. The <code>redo</code> command uses <code>Model#canRedo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitAddressBook()</code>, <code>Model#undoAddressBook()</code> or <code>Model#redoAddressBook()</code>. Thus, the <code>addressBookStateList</code> remains unchanged.</p>
+<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitModel()</code>, <code>Model#undoModel()</code> or <code>Model#redoModel()</code>. Thus, every <code>&#8230;&#8203;StateList</code> remains unchanged.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -722,7 +749,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitAddressBook()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>addressBookStateList</code>, all address book states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitModel()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>&#8230;&#8203;StateList</code>, all states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -745,7 +772,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire address book.</p>
+<p><strong>Alternative 1 (current choice):</strong> Saves the entire Model.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -778,14 +805,14 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of address book states.</p>
+<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of model states, in each <code>Versioned</code> class.</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
 </li>
 <li>
-<p>Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and <code>VersionedAddressBook</code>.</p>
+<p>Cons: Logic is duplicated 4 times. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and all 3 <code>Versioned</code> classes.</p>
 </li>
 </ul>
 </div>
@@ -1177,10 +1204,30 @@ It implements following commands:<br></p>
 <div class="sect3">
 <h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The user input is parsed into <code><em>TrackCommandParser</em></code> to generate a <code>Parameter</code> object, which is then passed on to <code><em>TrackCommand</em></code>. Upon execution of the command, the <code>Parameter</code> is then stored in/removed from the <code>TrackedDataList</code>. This <code>TrackedDataList</code> stores all the <code>Parameter</code> objects currently being tracked.</p>
+<p>The user input is parsed into <code><em>TrackCommandParser</em></code> to generate a <code>Parameter</code> object, which is then passed on to <code><em>TrackCommand</em></code>.
+Upon execution of the command, the <code>Parameter</code> is then stored in/removed from the <code>TrackedDataList</code>.
+This <code>TrackedDataList</code> stores all the <code>Parameter</code> objects currently being tracked.</p>
+</div>
+<div id="fig-ParameterClassDiagram" class="imageblock">
+<div class="content">
+<img src="images/ParameterClassDiagram.png" alt="ParameterClassDiagram" width="400">
+</div>
+<div class="title">Figure 21. Class Diagram for the <code>Parameter</code> class</div>
+</div>
+<div id="fig-TrackedDataListClassDiagram" class="imageblock">
+<div class="content">
+<img src="images/TrackedDataListClassDiagram.png" alt="TrackedDataListClassDiagram" width="400">
+</div>
+<div class="title">Figure 22. Class Diagram for the <code>TrackedDataList</code> class</div>
 </div>
 <div class="paragraph">
 <p>When a workout is marked as completed using the memory feature, if any tracked <code>Parameter</code> is present in the workout, if will be stored in <code>TrackedData</code>.</p>
+</div>
+<div id="fig-TrackedDataClassDiagram" class="imageblock">
+<div class="content">
+<img src="images/TrackedDataClassDiagram.png" alt="TrackedDataClassDiagram" width="400">
+</div>
+<div class="title">Figure 23. Class Diagram for the <code>TrackedData</code> class</div>
 </div>
 <div class="paragraph">
 <p><code>TrackedData</code> is analogous to <code>WorkoutBook</code>, but it does not enforce uniqueness between workouts, so as to allow for every completed workout that contains tracked parameters to be stored, regardless of uniqueness. This is done by utilising a <code>WorkoutList</code> object, analogous to the <code>UniqueWorkoutList</code> object used by <code>WorkoutBook</code>, with similar methods that allow for duplicates.</p>
@@ -1189,18 +1236,31 @@ It implements following commands:<br></p>
 <p>Shown below is an example scenario for the tracking feature.</p>
 </div>
 <div class="paragraph">
-<p>Step 1: The user executes <code>track start muscle/bicep</code>. The user input is parsed to create a <code>Parameter</code> object containing the prefix <code>muscle/</code> and the value <code>bicep</code>. The <code>Parameter</code> is stored into <code>TrackedDataList</code>. The UI then reflects the new <code>Parameter</code> being tracked.</p>
+<p><strong>Step 1:</strong> The user executes <code>track start muscle/bicep</code>. The user input is parsed to create a <code>Parameter</code> object containing the prefix <code>muscle/</code> and the value <code>bicep</code>. The <code>Parameter</code> is stored into <code>TrackedDataList</code>. The UI then reflects the new <code>Parameter</code> being tracked.</p>
 </div>
-<div class="imageblock">
+<div id="fig-TrackCommandSequenceDiagram1" class="imageblock">
 <div class="content">
 <img src="images/TrackCommandSequenceDiagram1.png" alt="TrackCommandSequenceDiagram1" width="800">
 </div>
+<div class="title">Figure 24. Interactions inside <code>Model</code> component when the user enters <code>track start muscle/bicep</code></div>
 </div>
 <div class="paragraph">
-<p>Step 2: The user executes <code>complete INDEX</code> on a desired workout. The <code>complete</code> command calls <code>Model#checkDataForTrack()</code>, which iterates through <code>TrackedDataList</code> to check whether any <code>Parameter</code> is present in the completed workout.</p>
+<p><strong>Step 2:</strong> The user executes <code>complete INDEX</code> on a desired workout. The <code>complete</code> command calls <code>Model#checkDataForTrack()</code>, which iterates through <code>TrackedDataList</code> to check whether any <code>Parameter</code> is present in the completed workout.</p>
 </div>
 <div class="paragraph">
-<p>Step 3: If any <code>Parameter</code> is present, the workout is stored both <code>TrackedData</code> and <code>WorkoutBook</code>. If none are present, the workout is just stored in <code>WorkoutBook</code>.</p>
+<p><strong>Step 3:</strong> If any <code>Parameter</code> is present, the workout is stored both <code>TrackedData</code> and <code>WorkoutBook</code>. If none are present, the workout is just stored in <code>WorkoutBook</code>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Step 4:</strong> To view the stored workouts, the <code>select</code> command is used to select a <code>Parameter</code> for viewing. The stored workouts that contain the selected <code>Parameter</code> will be displayed to the user.</p>
+</div>
+<div class="paragraph">
+<p>In a macroscopic view, the following activity diagram shows how the tracking feature is utilised:</p>
+</div>
+<div id="fig-TrackCommandActivityDiagram" class="imageblock">
+<div class="content">
+<img src="images/TrackFeatureActivityDiagram.png" alt="TrackFeatureActivityDiagram" width="800">
+</div>
+<div class="title">Figure 25. Activity diagram for the tracking feature</div>
 </div>
 </div>
 <div class="sect3">
@@ -1345,7 +1405,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 21. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 26. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -3237,4 +3297,4 @@ Expected: The first workout is remarked with "The workout is exhausted."</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 04:33:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 04:52:40 UTC</div></div></div></body></html>
