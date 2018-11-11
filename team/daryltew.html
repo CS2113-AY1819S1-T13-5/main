@@ -268,5 +268,185 @@ It implements following commands:<br></p>
 </ul>
 </div>
 </div>
+<div class="sect3">
+<h4 id="memory-feature"><a class="link" href="#memory-feature">Memory feature</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Current command with a valid input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Ensure that the index input is valid and not out of bounds.</p>
+</li>
+<li>
+<p>Ensure that the target workout of the index input has a state tag of either <code>future</code> or <code>completed</code>.</p>
+</li>
+<li>
+<p>Test case: <code>current 1</code><br>
+Expected: The workout at index 1 (filtered or unfiltered) will have its state tag change from <code>future</code> or <code>completed</code> to <code>current</code>.</p>
+</li>
+</ol>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 11:09:34 UTC</div></div></div></body></html>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Current command with an invalid index input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>current 5</code> (there are only 4 workouts)<br>
+Expected: A message saying "The workout index provided is invalid"</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Current command when there is already a workout with the state tag <code>current</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>current 1</code> (this workout or another workout already has a <code>current</code> state tag)<br>
+Expected: A message saying "There is already a current workout. Complete that before attempting again."</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Current command with an empty input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>current</code><br>
+Expected: A message saying "Invalid command format! current: Sets a workout to be the current workout identified by the index<br>
+number used in the displayed workout list. Parameters: INDEX (must be a positive integer) Example: current 1"</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Complete command with a valid input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Ensure that the index input is valid and not out of bounds.</p>
+</li>
+<li>
+<p>Test case: <code>complete 1</code><br>
+Expected: The workout at index 1 (filtered or unfiltered) will have its state tag change from <code>current</code> to <code>completed</code>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Complete command with an invalid index input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>complete 5</code> (there are only 4 workouts)<br>
+Expected: A message saying "The workout index provided is invalid"</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Complete command when the target workout has a state tag of <code>future</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>complete 1</code> (this workout has a <code>future</code> state tag)<br>
+Expected: A message saying "This workout must already be in the current state."</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Complete command when the target workout has a state tag of <code>completed</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>complete 1</code> (this workout already has a <code>completed</code> state tag)<br>
+Expected: A message saying "This workout is already completed."</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Complete command with an empty input</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>complete</code><br>
+Expected: A message saying "Invalid command format! current: Sets a workout to be a completed workout identified by the index<br>
+number used in the displayed workout list. Parameters: INDEX (must be a positive integer) Example: complete 1"</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 11:18:16 UTC</div></div></div></body></html>
