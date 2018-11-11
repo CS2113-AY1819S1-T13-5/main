@@ -13,7 +13,7 @@
 <p>Are you a professional athlete who is too lazy to manually search through your workout list to find your favourite workout?
 Are you an amateur who just started working out and doesn&#8217;t know where to begin?
 Or are you just someone who prefers to have all of your workouts in one place and organized in a tidy manner. Then WorkoutBook is the solution for you!
-WorkoutBook is a desktop address book application used for anyone who does workouts to manage their workouts. The user interacts with it using a CLI, and it has a GUI created with JavaFX.</p>
+WorkoutBook is a desktop workout book application used for anyone who does workouts to manage their workouts. The user interacts with it using a CLI, and it has a GUI created with JavaFX.</p>
 </div>
 </div>
 </div>
@@ -312,10 +312,8 @@ Change your user profile&#8217;s username to apple, height to 1.82m and update t
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current implementation</a></h4>
 <div class="paragraph">
-<p>The profile window is first being loaded by loading the <code><em>profileWindow.fxml file</em></code>. Thereafter, once the user request to open the profile window, it will then process it.</p>
-</div>
-<div class="paragraph">
-<p>There are 3 ways to open a profile window.</p>
+<p>The profile window is very similar to the help window. Once the MainApp is opened, it will load the <code>ProfileWindow.html</code> first.
+Thereafter, there are 3 ways a user can opt to open a profile window.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -333,7 +331,7 @@ Change your user profile&#8217;s username to apple, height to 1.82m and update t
 <div class="sect4">
 <h5 id="user-types-profile-in-command-box"><a class="link" href="#user-types-profile-in-command-box">User types "profile" in command box</a></h5>
 <div class="paragraph">
-<p>After executing the command <code>profile</code>, it will create an instance which uses <code>showProfileRequestEvent</code> method of <code>Events</code>. Then, the <code>UI</code> will <code>handleShowProfileRequestEvent</code> and the profile window will be opened.</p>
+<p>After executing the command <code>profile</code>, it will create an instance <code>profilecommand</code> which uses <code>showProfileRequestEvent</code> method of <code>Events</code>. Then, the <code>UI</code> will <code>handleShowProfileRequestEvent</code> and the profile window will be opened.</p>
 </div>
 <div id="fig-ProfileCommand" class="imageblock">
 <div class="content">
@@ -416,7 +414,7 @@ Change your user profile&#8217;s username to apple, height to 1.82m and update t
 </div>
 <div class="paragraph">
 <p>After parsing the file, the <code>ModifyCommandParser</code> will then find out which argument are to be edited. The parsed input will specify which attribute are to be edited according to their prefixes.
-After performing a boolean check to confirm which attribute have to be edited, the instance of <code>ProfileWindowManager</code> will then change the attribute. Once the attribute has been change, it will then proceed to load the new file.</p>
+After performing a boolean check to confirm which attribute have to be edited, the instance of <code>ProfileWindowManager</code> will then change the attribute.</p>
 </div>
 <div class="paragraph">
 <p>As J.soup only alters the text of the <code>ProfileWindow.html</code> file and will not overwrite it, the instance of <code>ProfileWindowManager</code> will first create an (empty) temporary html file, copy all the content of the altered <code>ProfileWindow.html</code> file
@@ -611,4 +609,4 @@ Expected: A message saying "Invalid Height format! Height should only be in x.xx
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 11:18:16 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 13:56:22 UTC</div></div></div></body></html>
