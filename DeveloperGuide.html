@@ -3100,6 +3100,141 @@ Expected: A message saying "Invalid Height format! Height should only be in x.xx
 </ol>
 </div>
 </div>
+<div class="sect3">
+<h4 id="traversing-the-workouts"><a class="link" href="#traversing-the-workouts">H.4.4. Traversing the workouts</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sort all workouts based on names in ascending a alphabetical order.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>sort</code><br>
+Expected: A message saying " sorted all workouts".</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Filter command with valid inputs, which contains <code>Duration</code>, <code>Equipment</code> and <code>Type</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>filter duration/20m type/strength equipment/dumbbell</code><br>
+Expected: A message saying "XX workouts listed!"</p>
+</li>
+<li>
+<p>Test case <code>filter type/cardio equipment/NIL duration/20m</code><br>
+Expected: A message saying "XX workouts listed!"</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Filter command with duplicate valid inputs.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>filter type/cardio duration/30m duration/20m equipment/weights</code><br>
+Expected: Only workouts that take 20 minutes will be searched. The rest will be filtered out.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Filter command missing one or more fields.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>filter duration/20m</code><br>
+Expected: A message saying "Invalid command format!" and an example will be given.</p>
+</li>
+<li>
+<p>Test case: <code>filter duration/20m + equipment/NIL</code><br>
+Expected: A message saying "Invalid command format!" and an example will be given.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 19:03:33 UTC</div></div></div></body></html>
+<div class="sect3">
+<h4 id="remark-a-workout"><a class="link" href="#remark-a-workout">H.4.5. Remark a workout</a></h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Remark a workout by selecting its index number and leaving a comment<br></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>remark 1 r/This workout trains biceps.</code><br>
+Expected: The remarked workout will be shown in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Remove a remark of a workout by selecting its index number and leaving it blank.<br></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>remark 1 r/</code><br>
+Expected: The target workout without remark will be shown in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Remark a workout with invalid inputs.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Steps:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>remark</code><br>
+Expected: A message saying "Invalid command format!", an instruction and an example will be provided.</p>
+</li>
+<li>
+<p>Test case <code>remark 1</code><br>
+Expected: A message saying "Invalid command format!", an instruction and an example will be provided.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Remark a workout with duplicate valid inputs.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>remark 1 r/This workout trains biceps. r/This workout is exhausted.</code><br>
+Expected: The first workout is remarked with "The workout is exhausted."</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 04:17:51 UTC</div></div></div></body></html>
