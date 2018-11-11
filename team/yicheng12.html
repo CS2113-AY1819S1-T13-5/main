@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>yicheng12 - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Yan YiCheng - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">WorkoutBook</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S1-T13-5/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>yicheng12 - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">WorkoutBook</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S1-T13-5/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Yan YiCheng - Project Portfolio</h1></div><div id="content"><div class="sect1">
 <h2 id="project-workoutbook"><a class="link" href="#project-workoutbook">PROJECT: WorkoutBook</a></h2>
 <div class="sectionbody">
 <hr>
@@ -242,6 +242,62 @@ Clears the remark of the 2nd workout.</p>
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="traversing-and-remark-feature"><a class="link" href="#traversing-and-remark-feature">Traversing and remark feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The traversing mechanism is facilitated by <code>VersionedAddressBook</code>. It extends <code>WorkoutBook</code>.
+It implements following commands:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SortCommand()</code> -Sorts the current workout book</p>
+</li>
+<li>
+<p><code>FilterCommand()</code> -Filters the workout book with three parameters (duration, equipment, type)</p>
+</li>
+<li>
+<p><code>SelectCommand()</code> -Select the workout by index number</p>
+</li>
+<li>
+<p><code>RemarkCommand()</code> -Remark the workout by index number</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Given below is an example usage scenario and how the traversing and remark mechanism behaves at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. The user launches the application, <code>add</code> some workouts to the workout book, by executing <code>add name/commando workout
+type/strength, cardio duration/20m difficulty/advanced equipment/dumbbell, bench muscle/bicep, tricep calories/150
+instruction/set 1: bicep curl reps: 4-6 set 2: tricep extension reps: 4-6 tag/heavy</code>, then <code>sort</code> the workout.
+The sort command calls the <code>sortFilteredWorkoutList()</code> of <code>Model</code> to sort the workout based on the names in ascending alphabetical order.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. The user executes <code>filter</code> to find the workouts with parameters of <code>duration</code>, <code>equipment</code> and <code>type</code>.
+i.e. <code>filter type/strength duration/20m equipment/dumbbell</code> The filter command uses the functional interface Predicate to test
+whether the workouts contain keywords, and return the workouts that include keywords. The <code>DurationPredicate</code>, <code>EquipmentPredicate</code>,
+and <code>TypePredicate</code> will be generated based on the UserInput which parsed by <code>FilterCommandParser</code>, and then the Predicates
+will be passed to <code>Filtercommand</code>. It collects the workouts that contain all three keywords by Predicate chaining.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The user executes <code>remark</code> to remark a workout. In remark command, the createRemarkedCommand
+is called to create a workout which is remarked.Then, it calls <code>updateWorkout()</code> of <code>Model</code> to update the workout that is remarked.
+Next, the remark command calls <code>updateFilteredWorkoutList()</code> of <code>Model</code> to update the list of workouts.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/traversingSequenceDiagram.png" alt="traversingSequenceDiagram" width="800">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/HighLevelRemarkSequenceDiagrams.png" alt="HighLevelRemarkSequenceDiagrams" width="800">
+</div>
+</div>
+</div>
 <div class="sect3">
 <h4 id="traversing-the-workouts"><a class="link" href="#traversing-the-workouts">Traversing the workouts</a></h4>
 <div class="olist arabic">
@@ -378,4 +434,5 @@ Expected: The first workout is remarked with "The workout is exhausted."</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 04:52:40 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:31:51 UTC</div></div></div></body></html>
