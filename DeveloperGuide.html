@@ -970,7 +970,7 @@ Since the sequence is very similar to single mode recommend, the sequence diagra
 <div class="sect3">
 <h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>The profile window is very similar to the help window. Once the MainApp is opened, it will load the <code>ProfileWindow.html</code> first.
+<p>The profile window is very similar to the help window. It gives the user a platform to store their personal information and workout presets. Once the MainApp is opened, it will load the <code>ProfileWindow.html</code> first.
 Thereafter, there are 3 ways a user can opt to open a profile window.</p>
 </div>
 <div class="ulist">
@@ -1065,14 +1065,11 @@ Thereafter, there are 3 ways a user can opt to open a profile window.</p>
 <div class="sect3">
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>This modify feature only affects the <code>ProfileWindow.html</code> file and <strong>will not</strong> affect the workout book. It gives the user a platform to store their personal information and workout presets.</p>
-</div>
-<div class="paragraph">
 <p>When the user keys in the input in the command box, the input is parsed in the <code>ModifyCommandParser</code>. An instance of <code>ProfileWindowManager</code> class will be instantiated and this will parse the <code>ProfileWindow.html</code> file via J.soup.</p>
 </div>
 <div class="paragraph">
-<p>After parsing the file, the <code>ModifyCommandParser</code> will then find out which argument are to be edited. The parsed input will specify which attribute are to be edited according to their prefixes.
-After performing a boolean check to confirm which attribute have to be edited, the instance of <code>ProfileWindowManager</code> will then change the attribute.</p>
+<p>After parsing the file, the <code>ModifyCommandParser</code> will then find out which argument are to be edited. There will be CommandException thrown for any invalid or empty parameters. The parsed input will then specify which attribute are to be edited according to their prefixes.
+After performing a boolean check to confirm which attribute have to be edited, the instance of <code>ProfileWindowManager</code> will then change the attribute by calling setAttribute, where Attribute can be calories, duration, gender etc..</p>
 </div>
 <div class="paragraph">
 <p>As J.soup only alters the text of the <code>ProfileWindow.html</code> file and will not overwrite it, the instance of <code>ProfileWindowManager</code> will first create an (empty) temporary html file, copy all the content of the altered <code>ProfileWindow.html</code> file
@@ -1082,7 +1079,25 @@ to the temporary html file, then overwrite the current <code>ProfileWindow.html<
 <div class="content">
 <img src="images/ModifyClassDiagram.png" alt="ModifyClassDiagram" width="700">
 </div>
-<div class="title">Figure 18. Class diagram that shows the how the different class interacts when executing modify command</div>
+<div class="title">Figure 18. Class diagram that shows the how the different class interacts when executing the <code>modify</code> command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModifyCommandSD.PNG" alt="ModifyCommandSD" width="700">
+</div>
+<div class="title">Figure 19. Sequence diagram that shows the Interactions inside the <code>Logic</code> component when executing <code>modify gender/male</code>.</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This modify feature only affects the <code>ProfileWindow.html</code> file and <strong>will not</strong> affect the workout book.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -1174,7 +1189,7 @@ It implements following commands:<br></p>
 <div class="content">
 <img src="images/CurrentCommandLogicComponentSequenceDiagram.png" alt="CurrentCommandLogicComponentSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 19. Interactions inside <code>Logic</code> component when pressing <code>current</code></div>
+<div class="title">Figure 20. Interactions inside <code>Logic</code> component when pressing <code>current</code></div>
 </div>
 <div class="paragraph">
 <p>Step 3. The user executes the complete command to change the <code>current</code> tag in the workout as specified by the index number to <code>completed</code>.</p>
@@ -1183,7 +1198,7 @@ It implements following commands:<br></p>
 <div class="content">
 <img src="images/CompleteCommandLogicComponentSequenceDiagram.png" alt="CompleteCommandLogicComponentSequenceDiagram" width="800">
 </div>
-<div class="title">Figure 20. Interactions inside <code>Logic</code> component when pressing <code>complete</code></div>
+<div class="title">Figure 21. Interactions inside <code>Logic</code> component when pressing <code>complete</code></div>
 </div>
 <div class="ulist">
 <ul>
@@ -1210,13 +1225,13 @@ This <code>TrackedDataList</code> stores all the <code>Parameter</code> objects 
 <div class="content">
 <img src="images/ParameterClassDiagram.png" alt="ParameterClassDiagram" width="400">
 </div>
-<div class="title">Figure 21. Class Diagram for the <code>Parameter</code> class</div>
+<div class="title">Figure 22. Class Diagram for the <code>Parameter</code> class</div>
 </div>
 <div id="fig-TrackedDataListClassDiagram" class="imageblock">
 <div class="content">
 <img src="images/TrackedDataListClassDiagram.png" alt="TrackedDataListClassDiagram" width="400">
 </div>
-<div class="title">Figure 22. Class Diagram for the <code>TrackedDataList</code> class</div>
+<div class="title">Figure 23. Class Diagram for the <code>TrackedDataList</code> class</div>
 </div>
 <div class="paragraph">
 <p>When a workout is marked as completed using the memory feature, if any tracked <code>Parameter</code> is present in the workout, if will be stored in <code>TrackedData</code>.</p>
@@ -1225,7 +1240,7 @@ This <code>TrackedDataList</code> stores all the <code>Parameter</code> objects 
 <div class="content">
 <img src="images/TrackedDataClassDiagram.png" alt="TrackedDataClassDiagram" width="400">
 </div>
-<div class="title">Figure 23. Class Diagram for the <code>TrackedData</code> class</div>
+<div class="title">Figure 24. Class Diagram for the <code>TrackedData</code> class</div>
 </div>
 <div class="paragraph">
 <p><code>TrackedData</code> is analogous to <code>WorkoutBook</code>, but it does not enforce uniqueness between workouts, so as to allow for every completed workout that contains tracked parameters to be stored, regardless of uniqueness. This is done by utilising a <code>WorkoutList</code> object, analogous to the <code>UniqueWorkoutList</code> object used by <code>WorkoutBook</code>, with similar methods that allow for duplicates.</p>
@@ -1240,7 +1255,7 @@ This <code>TrackedDataList</code> stores all the <code>Parameter</code> objects 
 <div class="content">
 <img src="images/TrackCommandSequenceDiagram1.png" alt="TrackCommandSequenceDiagram1" width="800">
 </div>
-<div class="title">Figure 24. Interactions inside <code>Model</code> component when the user enters <code>track start muscle/bicep</code></div>
+<div class="title">Figure 25. Interactions inside <code>Model</code> component when the user enters <code>track start muscle/bicep</code></div>
 </div>
 <div class="paragraph">
 <p><strong>Step 2:</strong> The user executes <code>complete INDEX</code> on a desired workout. The <code>complete</code> command calls <code>Model#checkDataForTrack()</code>, which iterates through <code>TrackedDataList</code> to check whether any <code>Parameter</code> is present in the completed workout.</p>
@@ -1258,7 +1273,7 @@ This <code>TrackedDataList</code> stores all the <code>Parameter</code> objects 
 <div class="content">
 <img src="images/TrackFeatureActivityDiagram.png" alt="TrackFeatureActivityDiagram" width="800">
 </div>
-<div class="title">Figure 25. Activity diagram for the tracking feature</div>
+<div class="title">Figure 26. Activity diagram for the tracking feature</div>
 </div>
 </div>
 <div class="sect3">
@@ -1403,7 +1418,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 26. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 27. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -3475,4 +3490,4 @@ number used in the displayed workout list. Parameters: INDEX (must be a positive
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 07:54:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 07:58:14 UTC</div></div></div></body></html>

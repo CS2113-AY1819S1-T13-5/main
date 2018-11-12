@@ -332,7 +332,7 @@ Change your user profile&#8217;s username to apple, height to 1.82m and update t
 <div class="sect3">
 <h4 id="current-implementation"><a class="link" href="#current-implementation">Current implementation</a></h4>
 <div class="paragraph">
-<p>The profile window is very similar to the help window. Once the MainApp is opened, it will load the <code>ProfileWindow.html</code> first.
+<p>The profile window is very similar to the help window. It gives the user a platform to store their personal information and workout presets. Once the MainApp is opened, it will load the <code>ProfileWindow.html</code> first.
 Thereafter, there are 3 ways a user can opt to open a profile window.</p>
 </div>
 <div class="ulist">
@@ -427,14 +427,11 @@ Thereafter, there are 3 ways a user can opt to open a profile window.</p>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
 <div class="paragraph">
-<p>This modify feature only affects the <code>ProfileWindow.html</code> file and <strong>will not</strong> affect the workout book. It gives the user a platform to store their personal information and workout presets.</p>
-</div>
-<div class="paragraph">
 <p>When the user keys in the input in the command box, the input is parsed in the <code>ModifyCommandParser</code>. An instance of <code>ProfileWindowManager</code> class will be instantiated and this will parse the <code>ProfileWindow.html</code> file via J.soup.</p>
 </div>
 <div class="paragraph">
-<p>After parsing the file, the <code>ModifyCommandParser</code> will then find out which argument are to be edited. The parsed input will specify which attribute are to be edited according to their prefixes.
-After performing a boolean check to confirm which attribute have to be edited, the instance of <code>ProfileWindowManager</code> will then change the attribute.</p>
+<p>After parsing the file, the <code>ModifyCommandParser</code> will then find out which argument are to be edited. There will be CommandException thrown for any invalid or empty parameters. The parsed input will then specify which attribute are to be edited according to their prefixes.
+After performing a boolean check to confirm which attribute have to be edited, the instance of <code>ProfileWindowManager</code> will then change the attribute by calling setAttribute, where Attribute can be calories, duration, gender etc..</p>
 </div>
 <div class="paragraph">
 <p>As J.soup only alters the text of the <code>ProfileWindow.html</code> file and will not overwrite it, the instance of <code>ProfileWindowManager</code> will first create an (empty) temporary html file, copy all the content of the altered <code>ProfileWindow.html</code> file
@@ -444,7 +441,25 @@ to the temporary html file, then overwrite the current <code>ProfileWindow.html<
 <div class="content">
 <img src="../images/ModifyClassDiagram.png" alt="ModifyClassDiagram" width="700">
 </div>
-<div class="title">Figure 4. Class diagram that shows the how the different class interacts when executing modify command</div>
+<div class="title">Figure 4. Class diagram that shows the how the different class interacts when executing the <code>modify</code> command</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModifyCommandSD.PNG" alt="ModifyCommandSD" width="700">
+</div>
+<div class="title">Figure 5. Sequence diagram that shows the Interactions inside the <code>Logic</code> component when executing <code>modify gender/male</code>.</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This modify feature only affects the <code>ProfileWindow.html</code> file and <strong>will not</strong> affect the workout book.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect3">
@@ -629,4 +644,4 @@ Expected: A message saying "Invalid Height format! Height should only be in x.xx
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 07:54:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 07:58:14 UTC</div></div></div></body></html>
