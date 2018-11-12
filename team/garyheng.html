@@ -149,6 +149,9 @@ Format: <code>track SUBCOMMAND PREFIX/VALUE</code></p>
 <li>
 <p>To view the completed workouts that have been recorded, refer to <a href="#selecting-a-tracked-parameter-code-select-code">the <code>select</code> command</a></p>
 </li>
+<li>
+<p>If completed workouts have been tracked, they will remain tracked even if a parameter stops being tracked. To view these workouts, start tracking the parameter again using <code>track start PREFIX/VALUE</code> and then use the <code>select</code> command to select the desired parameter.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -232,232 +235,9 @@ Previously completed workouts that were tracked, which contain the selected para
 The undo/redo section in the Developer Guide was originally written by the aforementioned developement team and has been modified for our Developer Guide.</p>
 </div>
 <div class="sect2">
-<h3 id="undo-redo-feature"><a class="link" href="#undo-redo-feature">Undo/Redo feature</a></h3>
-<div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
-<div class="paragraph">
-<p>The undo/redo mechanism is facilitated by <code>VersionedWorkoutBook</code>, <code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code>.
-<code>VersionedWorkoutBook</code> extends <code>WorkoutBook</code> with an undo/redo history, stored internally as an <code>workoutBookStateList</code> and <code>currentStatePointer</code>.
-Additionally, it implements the following operations:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>VersionedWorkoutBook#commit()</code>&#8201;&#8212;&#8201;Saves the current workout book state in its history.</p>
-</li>
-<li>
-<p><code>VersionedWorkoutBook#undo()</code>&#8201;&#8212;&#8201;Restores the previous workout book state from its history.</p>
-</li>
-<li>
-<p><code>VersionedWorkoutBook#redo()</code>&#8201;&#8212;&#8201;Restores a previously undone workout book state from its history.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code> are implemented in a similar fashion, with their own <code>&#8230;&#8203;StateList</code>, <code>currentStatePointer</code>, and <code>commit&#8230;&#8203;()</code>, <code>undo&#8230;&#8203;()</code> and <code>redo&#8230;&#8203;()</code> methods.</p>
-</div>
-<div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#commitModel()</code>, <code>Model#undoModel()</code> and <code>Model#redoModel()</code> respectively.
-These methods serve as wrappers, ensuring that all 3 <code>Versioned</code> classes carry out the same operations together.
-The implementation of <code>Model#commitModel()</code> is shown below as an example.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Override</span>
-<span class="directive">public</span> <span class="type">void</span> commitModel() {
-    commitWorkoutBook();
-    commitTrackedDataList();
-    commitTrackedData();
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Here, <code>Model#commitWorkoutBook()</code> calls <code>VersionedWorkoutBook#commit()</code>, and <code>Model#commitTrackedDataList()</code> and <code>Model#commitTrackedData()</code> function similarly.</p>
-</div>
-<div class="paragraph">
-<p>Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. The user launches the application for the first time. The <code>VersionedWorkoutBook</code>, <code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code> will be initialized with their initial states, and their respective <code>currentStatePointer</code> point to their respective initial state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoStartingStateListDiagram.png" alt="UndoRedoStartingStateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 2. The user executes <code>delete 5</code> command to delete the 5th person in the address book. The <code>delete</code> command calls <code>Model#commitModel()</code>, causing the modified state of the workout book after the <code>delete 5</code> command executes to be saved in the <code>workoutBookStateList</code>.
-To ensure that the entire model&#8217;s state is preserved, <code>Model#commitModel()</code> ensures that the states of <code>VersionedTrackedDataList</code> and <code>VersionedTrackedData</code> are also saved in their respective <code>&#8230;&#8203;StateList</code> attributes, and the <code>currentStatePointer</code> of the 3 <code>Versioned</code> classes are moved to the newly inserted state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand1StateListDiagram.png" alt="UndoRedoNewCommand1StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 3. The user executes <code>add name/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitModel()</code>, causing another modified state to be saved into every <code>&#8230;&#8203;StateList</code>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand2StateListDiagram.png" alt="UndoRedoNewCommand2StateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If a command fails its execution, it will not call <code>Model#commitModel()</code>, so no new state will be saved into every <code>&#8230;&#8203;StateList</code>.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the <code>undo</code> command. The <code>undo</code> command will call <code>Model#undoModel()</code>, which will shift the <code>currentStatePointer</code> of all 3 <code>Versioned</code> classes once to the left, pointing it to the previous state, and restores the entire model to that state.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoExecuteUndoStateListDiagram.png" alt="UndoRedoExecuteUndoStateListDiagram" width="800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index 0, pointing to the initial state, then there are no previous states to restore. The <code>undo</code> command uses <code>Model#canUndo()</code> to check if this is the case.
-If so, it will return an error to the user rather than attempting to perform the undo.
-<code>Model#canUndo()</code> functions by checking whether the <code>currentStatePointer</code> of all 3 <code>Versioned</code> classes are at index 0.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the undo operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoSequenceDiagram.png" alt="UndoRedoSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>redo</code> command does the opposite&#8201;&#8212;&#8201;it calls <code>Model#redoModel()</code>, which shifts every <code>currentStatePointer</code> once to the right, pointing to the previously undone state, and restores the entire model to that state.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-If the <code>currentStatePointer</code> is at index <code>&#8230;&#8203;StateList.size() - 1</code>, pointing to the latest state, then there are no undone states to restore. The <code>redo</code> command uses <code>Model#canRedo()</code> to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Step 5. The user then decides to execute the command <code>list</code>. Commands that do not modify the address book, such as <code>list</code>, will usually not call <code>Model#commitModel()</code>, <code>Model#undoModel()</code> or <code>Model#redoModel()</code>. Thus, every <code>&#8230;&#8203;StateList</code> remains unchanged.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand3StateListDiagram.png" alt="UndoRedoNewCommand3StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitModel()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>&#8230;&#8203;StateList</code>, all states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add name/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoNewCommand4StateListDiagram.png" alt="UndoRedoNewCommand4StateListDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>The following activity diagram summarizes what happens when a user executes a new command:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UndoRedoActivityDiagram.png" alt="UndoRedoActivityDiagram" width="650">
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-how-undo-redo-executes"><a class="link" href="#aspect-how-undo-redo-executes">Aspect: How undo &amp; redo executes</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Saves the entire Model.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement.</p>
-</li>
-<li>
-<p>Cons: May have performance issues in terms of memory usage.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Individual command knows how to undo/redo by itself.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the workout being deleted).</p>
-</li>
-<li>
-<p>Cons: We must ensure that the implementation of each individual command are correct.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-the-undo-redo-commands"><a class="link" href="#aspect-data-structure-to-support-the-undo-redo-commands">Aspect: Data structure to support the undo/redo commands</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Use a list to store the history of model states, in each <code>Versioned</code> class.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.</p>
-</li>
-<li>
-<p>Cons: Logic is duplicated 4 times. For example, when a new command is executed, we must remember to update both <code>HistoryManager</code> and all 3 <code>Versioned</code> classes.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Use <code>HistoryManager</code> for undo/redo</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.</p>
-</li>
-<li>
-<p>Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as <code>HistoryManager</code> now needs to do two different things.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect2">
 <h3 id="tracking-feature"><a class="link" href="#tracking-feature">Tracking Feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
 <p>The user input is parsed into <code>TrackCommandParser</code> to generate a <code>Parameter</code> object, which is then passed on to <code>TrackCommand</code>.
 Upon execution of the command, the <code>Parameter</code> is then stored in/removed from the <code>TrackedDataList</code>.
@@ -519,7 +299,7 @@ This <code>TrackedDataList</code> stores all the <code>Parameter</code> objects 
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-1-how-the-workouts-that-match-tracked-parameters-are-stored"><a class="link" href="#aspect-1-how-the-workouts-that-match-tracked-parameters-are-stored">Aspect 1: How the workouts that match tracked parameters are stored</a></h5>
 <div class="ulist">
@@ -635,4 +415,4 @@ This <code>TrackedDataList</code> stores all the <code>Parameter</code> objects 
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:24:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:39:06 UTC</div></div></div></body></html>
