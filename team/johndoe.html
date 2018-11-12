@@ -292,7 +292,7 @@ To ensure that the entire model&#8217;s state is preserved, <code>Model#commitMo
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. The user executes <code>add n/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitModel()</code>, causing another modified state to be saved into every <code>&#8230;&#8203;StateList</code>.</p>
+<p>Step 3. The user executes <code>add name/David &#8230;&#8203;</code> to add a new person. The <code>add</code> command also calls <code>Model#commitModel()</code>, causing another modified state to be saved into every <code>&#8230;&#8203;StateList</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -328,7 +328,7 @@ If a command fails its execution, it will not call <code>Model#commitModel()</co
 <td class="content">
 If the <code>currentStatePointer</code> is at index 0, pointing to the initial state, then there are no previous states to restore. The <code>undo</code> command uses <code>Model#canUndo()</code> to check if this is the case.
 If so, it will return an error to the user rather than attempting to perform the undo.
-<code>Model#canUndo()</code> functions by checking whether the <code>currentStatePointer</code> of all 3 <code>Versioned</code> classes.
+<code>Model#canUndo()</code> functions by checking whether the <code>currentStatePointer</code> of all 3 <code>Versioned</code> classes are at index 0.
 </td>
 </tr>
 </table>
@@ -365,7 +365,7 @@ If the <code>currentStatePointer</code> is at index <code>&#8230;&#8203;StateLis
 </div>
 </div>
 <div class="paragraph">
-<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitModel()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>&#8230;&#8203;StateList</code>, all states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add n/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
+<p>Step 6. The user executes <code>clear</code>, which calls <code>Model#commitModel()</code>. Since the <code>currentStatePointer</code> is not pointing at the end of the <code>&#8230;&#8203;StateList</code>, all states after the <code>currentStatePointer</code> will be purged. We designed it this way because it no longer makes sense to redo the <code>add name/David &#8230;&#8203;</code> command. This is the behavior that most modern desktop applications follow.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -405,7 +405,7 @@ If the <code>currentStatePointer</code> is at index <code>&#8230;&#8203;StateLis
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the person being deleted).</p>
+<p>Pros: Will use less memory (e.g. for <code>delete</code>, just save the workout being deleted).</p>
 </li>
 <li>
 <p>Cons: We must ensure that the implementation of each individual command are correct.</p>
@@ -461,4 +461,4 @@ If the <code>currentStatePointer</code> is at index <code>&#8230;&#8203;StateLis
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:59:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:24:01 UTC</div></div></div></body></html>
