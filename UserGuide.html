@@ -1077,12 +1077,14 @@ There is no need to save manually.</p>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top">Command</th>
+<th class="tableblock halign-left valign-top">Format</th>
 <th class="tableblock halign-left valign-top">Example</th>
 </tr>
 </thead>
@@ -1090,76 +1092,94 @@ There is no need to save manually.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Add</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>add name/NAME type/TYPE duration/DURATION difficulty/DIFFICULTY equipment/EQUIPMENT muscle/MUSCLE calories/CALORIES instruction/INSTRUCTION [tag/TAG]&#8230;&#8203;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>add name/john doe&#8217;s workout type/strength duration/20m difficulty/beginner equipment/dumbbell muscle/bicep calories/150 instruction/set1: bicep curl reps: 4-6 tag/heavy tag/favourite</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Clear</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>clear</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Complete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>complete INDEX</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>complete 1</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Current</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>current INDEX</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>current 1</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete INDEX</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>delete 1</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Edit</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit 1 name/NAME &#8230;&#8203;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit INDEX name/NAME [type/TYPE] [duration/DURATION] [difficulty/DIFFICULTY] [equipment/EQUIPMENT] [muscle/MUSCLE] [calories/CALORIES] [instruction/INSTRUCTION] [tag/TAG]…​</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>edit 1 type/Anaerobic difficulty/beginner</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Exit</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>exit</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Filter</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>filter duration/20m equipment/dumbbell type/strength</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>filter type/TYPE duration/DURATION equipment/EQUIPMENT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>filter type/strength duration/20m equipment/dumbbell</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">History</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>history</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>list</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Modify</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>modify [gender/GENDER] [username/USERNAME] [height/HEIGHT] [weight/WEIGHT] [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>modify gender/female username/sarah height/1.69 weight/87.2 calories/150 difficulty/beginner duration/15m</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Recommend</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>recommend mode/MODE [calories/CALORIES] [difficulty/DIFFICULTY] [duration/DURATION]</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>recommend mode/single difficulty/beginner</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Redo</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>redo</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Remark</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>remark 1 r/REMARK</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>remark 1 r/interesting&#8230;&#8203;</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Select</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>select INDEX</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>select 1</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sort</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>sort</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Track</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>track SUBCOMMAND PREFIX/VALUE</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>track start muscle/bicep</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Undo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>undo</code></p></td>
 </tr>
 </tbody>
 </table>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 04:08:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 06:06:11 UTC</div></div></div></body></html>
