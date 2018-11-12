@@ -28,7 +28,7 @@ WorkoutBook is a desktop address book application used for anyone who does worko
 <ul>
 <li>
 <p><span class="underline">What it does</span>: Allows the user to find workouts that have the respective <code>Calories</code>, <code>Duration</code> and <code>Difficulty</code>.
-Moreover, user is also able to find workouts that have the respective <code>Calories</code>, <code>Duration</code> and <code>Difficulty</code> under the workout presets in the user profile.
+Moreover, the user is also able to find workouts that have the respective <code>Calories</code>, <code>Duration</code> and <code>Difficulty</code> under the workout presets in the user profile.
 With the notion of optional parameters, it allows the user the flexibility to decide whether any of these <code>Calories</code>, <code>Duration</code> and <code>Difficulty</code> is mandatory or good to have when finding workouts.</p>
 </li>
 <li>
@@ -197,21 +197,8 @@ Duplicate parameters after one another will only take the last parameter input. 
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Recommend command only recommends workout from the current workout list.</p>
+<p>Workouts that the <code>recommend</code> command returns are taken from the entire workout list</p>
 </div>
-</td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-To recommend from the entire list of workouts, you should first type <code>list</code> in the command box and press <kbd>Enter</kbd> to
-retrieve the entire list of workouts.
 </td>
 </tr>
 </table>
@@ -224,7 +211,7 @@ retrieve the entire list of workouts.
 </td>
 <td class="content">
 <div class="paragraph">
-<p>When one workout is requested (either through the user&#8217;s WorkoutPresets or the user input with a specified <code>Mode</code> of single) and there is more than one matching workout, a random matching workout is retrieved.</p>
+<p>When one workout is requested (either through the user&#8217;s WorkoutPresets or the user input with a specified <code>Mode</code> of single) and there is more than one matching workout, a random matching workout is selected.</p>
 </div>
 </td>
 </tr>
@@ -339,7 +326,7 @@ Recommends all advanced 35 minute workout that burns 200 calories.</p>
 <p><strong>Recommend with optional prefixes</strong></p>
 </div>
 <div class="paragraph">
-<p>Format: <code>recommend mode/MODE ocalories or calories/CALORIES odifficulty or difficulty/DIFFICULTY oduration or duration/DURATION</code></p>
+<p>Format: <code>recommend mode/MODE calories/CALORIES or ocalories/CALORIES difficulty/DIFFICULTY or odifficulty/DIFFICULTY duration/DURATION or oduration/DURATION</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -410,8 +397,8 @@ Given below is a class diagram containing <code>RecommendArguments</code> and th
 </div>
 <div class="paragraph">
 <p>The <code>RecommendArguments</code> instance is passed to a <code>getFinalFilteredInternalList()</code> method in the <code>Model</code> component.
-This method filters the current workout list in the <code>UI</code> by <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> if specified by the user, and returns a new list of filtered workouts.
-The original workout list in the <code>UI</code> is not modified. The activity diagram below depicts the execution flow of the <code>recommend</code> command.</p>
+This method filters the entire workout list by <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> if specified by the user, and returns a new list of filtered workouts.
+The original workout list is not modified. The activity diagram below depicts the execution flow of the <code>recommend</code> command.</p>
 </div>
 <div id="fig-RecommendCommandAD" class="imageblock">
 <div class="content">
@@ -423,34 +410,7 @@ The original workout list in the <code>UI</code> is not modified. The activity d
 <p>&#160;<br></p>
 </div>
 <div class="paragraph">
-<p>On command execution, a new <code>JumpToRecommendListRequestEvent</code> is created and posted to <code>EventsCenter</code>.
-Shown below is the component interactions for the <code>recommend mode/single calories/150</code> command.</p>
-</div>
-<div id="fig-RecommendEventSD" class="imageblock">
-<div class="content">
-<img src="../images/SDForRecommendEvent.png" alt="SDForRecommendEvent" width="700">
-</div>
-<div class="title">Figure 5. Component interactions for <code>recommend mode/single calories/150</code> command (part 1).</div>
-</div>
-<div class="paragraph">
-<p>&#160;<br></p>
-</div>
-<div class="paragraph">
-<p>The event then propagates through <code>EventsCenter</code> to the <code>WorkoutListPanel</code>.
-The <code>WorkoutListPanel</code> will call <code>handleJumpToRecommendListRequestEvent()</code> and update the <code>UI</code> to scroll to and select the workout.
-The process is shown in the Figure below.</p>
-</div>
-<div id="fig-RecommendEventHandlingSD" class="imageblock">
-<div class="content">
-<img src="../images/SDForRecommendEventHandling.png" alt="SDForRecommendEventHandling" width="500">
-</div>
-<div class="title">Figure 6. Component interactions for <code>recommend mode/single calories/150</code> command (part 2).</div>
-</div>
-<div class="paragraph">
-<p>&#160;<br></p>
-</div>
-<div class="paragraph">
-<p>For the other path, the filtered list returned from the <code>getFinalFilteredInternalList()</code> is passed to <code>WorkoutsPredicate</code> which compares every workout in the filtered list to the entire list of workouts.
+<p>For both paths, the filtered list returned from the <code>getFinalFilteredInternalList()</code> is passed to <code>WorkoutsPredicate</code> which compares every workout in the filtered list to the entire list of workouts.
 The predicate will only be true when the workout matches AT LEAST ONE of the workouts in the filtered list.
 The implementation of that can be seen below:</p>
 </div>
@@ -471,7 +431,34 @@ The sequence diagram of this entire process can be seen below:</p>
 <div class="content">
 <img src="../images/SDForRecommendNonEvent.png" alt="SDForRecommendNonEvent" width="900">
 </div>
-<div class="title">Figure 7. Interactions inside the <code>Logic</code> component for the <code>recommend mode/single calories/150</code> command.</div>
+<div class="title">Figure 5. Interactions inside the <code>Logic</code> component for the <code>recommend mode/all calories/150</code> command.</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p>However, for single mode <code>recommend</code>, a new <code>JumpToRecommendListRequestEvent</code> is created and posted to <code>EventsCenter</code>.
+Shown below is the component interactions for the <code>recommend mode/single calories/150</code> command.</p>
+</div>
+<div id="fig-RecommendEventSD" class="imageblock">
+<div class="content">
+<img src="../images/SDForRecommendEvent.png" alt="SDForRecommendEvent" width="700">
+</div>
+<div class="title">Figure 6. Component interactions for <code>recommend mode/single calories/150</code> command (part 1).</div>
+</div>
+<div class="paragraph">
+<p>&#160;<br></p>
+</div>
+<div class="paragraph">
+<p>The event then propagates through <code>EventsCenter</code> to the <code>WorkoutListPanel</code>.
+The <code>WorkoutListPanel</code> will call <code>handleJumpToRecommendListRequestEvent()</code> and update the <code>UI</code> to scroll to and select the workout.
+The process is shown in the Figure below.</p>
+</div>
+<div id="fig-RecommendEventHandlingSD" class="imageblock">
+<div class="content">
+<img src="../images/SDForRecommendEventHandling.png" alt="SDForRecommendEventHandling" width="500">
+</div>
+<div class="title">Figure 7. Component interactions for <code>recommend mode/single calories/150</code> command (part 2).</div>
 </div>
 <div class="paragraph">
 <p>&#160;<br></p>
@@ -479,7 +466,7 @@ The sequence diagram of this entire process can be seen below:</p>
 <div class="paragraph">
 <p><code>recommend</code> command is integrated with the profile. User can find a workout with the respective data types <code>Calories</code>, <code>Difficulty</code> and <code>Duration</code> if specified under the workout presets in the profile.
 After that, user just have to type <code>recommend</code> in the command box and press enter to get the workout.
-Since the sequence is very similar to single mode recommend, the sequence diagram of this entire process can be seen in Figure 12 and 13.</p>
+Since the sequence is very similar to single mode recommend, the sequence diagram of this entire process can be seen in Figure 12,13 and 14.</p>
 </div>
 </div>
 <div class="sect3">
@@ -566,7 +553,7 @@ Expected: A message saying that the workout does not exist in the WorkoutBook wi
 </li>
 <li>
 <p>Test case: <code>recommend calories/150</code><br>
-Expected: A message saying that an invalid format is used and proposing the correct format will be shown in the status message.</p>
+Expected: A message proposing the correct format will be shown in the status message.</p>
 </li>
 </ol>
 </div>
@@ -600,4 +587,4 @@ Expected: A message saying workout is recommended will be shown in the status me
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 08:12:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:07:32 UTC</div></div></div></body></html>
